@@ -11,9 +11,11 @@ and migrating iOS app architectures. It covers MVC, MVP, MVVM (Combine and
 `@Observable`), MVVM-C, VIPER, Clean Swift, Clean Architecture, TCA,
 Redux/ReSwift, RIBs, and modular SPM/Tuist setups.
 
-The bundle is intentionally lean: shared skills live in `skills/`, Claude gets a
-tracked agent definition in `agents/`, and Codex gets an optional custom-agent
-example in `codex-agents/`.
+The bundle is intentionally lean: the installable plugin lives in
+`plugins/ios-architect/`, shared skills live under
+`plugins/ios-architect/skills/`, Claude gets a tracked agent definition in
+`plugins/ios-architect/agents/`, and Codex gets an optional custom-agent example
+in `plugins/ios-architect/codex-agents/`.
 
 ## What You Get
 
@@ -50,28 +52,42 @@ grid in [iOS-Architecture-Comparison.xlsx](iOS-Architecture-Comparison.xlsx).
 
 ## Enable
 
-This repo is packaged through manifests instead of ad hoc install scripts:
+This repo is packaged as a marketplace for Claude Code and Codex:
 
 | Runtime | Manifest | Contents |
 |---|---|---|
-| Codex | `.codex-plugin/plugin.json` | Shared skills from `skills/` |
-| Claude | `.claude-plugin/plugin.json` | `agents/ios-architect.md` plus shared skills from `skills/` |
+| Codex | `.agents/plugins/marketplace.json` | `plugins/ios-architect/.codex-plugin/plugin.json` plus shared skills |
+| Claude | `.claude-plugin/marketplace.json` | `plugins/ios-architect/.claude-plugin/plugin.json`, `plugins/ios-architect/agents/ios-architect.md`, and shared skills |
 
-For Claude, use the `ios-architect` agent exposed by the plugin.
+For Claude Code:
+
+```bash
+claude plugin marketplace add kbelasheuski/ios-architecture-skills
+claude plugin install ios-architect@ios-architecture-skills
+```
+
+For Codex:
+
+```bash
+codex plugin marketplace add kbelasheuski/ios-architecture-skills
+codex plugin add ios-architect@ios-architecture-skills
+```
+
+For Claude, use the `ios-architect` agent exposed by the plugin after install.
 
 For Codex, the plugin exposes the shared skills. If you also want a named Codex
 custom agent, copy the optional example:
 
 ```bash
 mkdir -p .codex/agents
-cp codex-agents/ios-architect.toml .codex/agents/ios-architect.toml
+cp plugins/ios-architect/codex-agents/ios-architect.toml .codex/agents/ios-architect.toml
 ```
 
 For a global Codex custom agent:
 
 ```bash
 mkdir -p ~/.codex/agents
-cp codex-agents/ios-architect.toml ~/.codex/agents/ios-architect.toml
+cp plugins/ios-architect/codex-agents/ios-architect.toml ~/.codex/agents/ios-architect.toml
 ```
 
 The optional Codex agent intentionally leaves `model` unset so the runtime or
@@ -120,7 +136,7 @@ xcodebuild test -scheme TCAExample -skipMacroValidation \
 Deployment floor is iOS 17 for every buildable example.
 
 The examples follow the shared spec in
-[skills/REFERENCE_FEATURE.md](skills/REFERENCE_FEATURE.md) and vendor their own
+[plugins/ios-architect/skills/REFERENCE_FEATURE.md](plugins/ios-architect/skills/REFERENCE_FEATURE.md) and vendor their own
 domain, data, presentation, and test support so they can be inspected in
 isolation.
 

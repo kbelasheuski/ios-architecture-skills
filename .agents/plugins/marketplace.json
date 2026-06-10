@@ -1,0 +1,20 @@
+{
+  "name": "ios-architecture-skills",
+  "interface": {
+    "displayName": "iOS Architecture Skills"
+  },
+  "plugins": [
+    {
+      "name": "ios-architect",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ios-architect"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Engineering"
+    }
+  ]
+}

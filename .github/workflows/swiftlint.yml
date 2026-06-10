@@ -7,22 +7,35 @@ on:
     paths:
       - "examples/**"
       - ".swiftlint.yml"
+      - ".github/workflows/swiftlint.yml"
   pull_request:
     paths:
       - "examples/**"
       - ".swiftlint.yml"
+      - ".github/workflows/swiftlint.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   swiftlint:
     name: SwiftLint
-    runs-on: macos-latest
+    runs-on: macos-15
+    timeout-minutes: 10
+    env:
+      SWIFTLINT_VERSION: 0.63.3
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.3
 
       - name: Install SwiftLint
-        run: brew install swiftlint
+        run: |
+          curl -L -o swiftlint.zip "https://github.com/realm/SwiftLint/releases/download/${SWIFTLINT_VERSION}/portable_swiftlint.zip"
+          unzip -q swiftlint.zip -d .swiftlint-bin
+          chmod +x .swiftlint-bin/swiftlint
+          .swiftlint-bin/swiftlint version
 
       - name: Lint examples
-        run: swiftlint --no-cache --config .swiftlint.yml
+        run: .swiftlint-bin/swiftlint --no-cache --config .swiftlint.yml

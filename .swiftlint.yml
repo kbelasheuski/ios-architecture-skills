@@ -1,7 +1,7 @@
 included:
   - examples
 
-# Keep the SwiftLint GitHub Actions workflow scoped to examples and this config.
+# Keep the SwiftLint workflow scoped to examples, this config, and the workflow file.
 
 excluded:
   - examples/**/.build

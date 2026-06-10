@@ -166,5 +166,5 @@ public extension UsersPage {
 
 - DI: every screen receives repository or use-cases via init; no globals/singletons.
 - Concurrency: `async`/`await`, UI on `@MainActor`.
-- Deployment target: iOS 17+ unless skill notes otherwise (MVC/MVP/VIPER may target older).
+- Deployment target: iOS 17+ for every buildable example.
 - Tests: each skill ships at least 1 list-loading test + 1 detail-save test.

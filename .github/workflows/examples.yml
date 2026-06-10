@@ -7,14 +7,21 @@ on:
       - main
     paths:
       - "examples/**"
+      - ".github/workflows/examples.yml"
   pull_request:
     paths:
       - "examples/**"
+      - ".github/workflows/examples.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
     name: ${{ matrix.scheme }}
-    runs-on: macos-latest
+    runs-on: macos-15
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -45,7 +52,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.3
 
       - name: Test
         working-directory: ${{ matrix.path }}
