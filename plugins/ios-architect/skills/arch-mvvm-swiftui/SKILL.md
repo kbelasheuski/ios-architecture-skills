@@ -38,13 +38,21 @@ Data/LiveUserRepository.swift
 The full worked `UserList + UserDetail` feature lives in
 **`examples/mvvm-swiftui/`** — `@Observable @MainActor` models, SwiftUI Views,
 the app entry point, and model XCTest. `Domain` + `Data` + test fakes follow
-`skills/REFERENCE_FEATURE.md` (vendored per example). Key things to
+`plugins/ios-architect/skills/REFERENCE_FEATURE.md` (vendored per example). Key things to
 notice:
 
 - **The model is `@Observable @MainActor`**, owned by the View via `@State` and injected into child views as a plain property — no `ObservableObject`/`@Published`.
 - **Paging, refresh, and error state live in the model**, exposed as `private(set)` properties; the View only sends intent (`viewDidLoad`, `didPullToRefresh`, `didLoadNextPageIfNeeded`).
 - **Navigation is a closure passed into the model**, not a reference the model holds — keeps the model UIKit/SwiftUI-free and testable.
 - **Models never import SwiftUI**; they depend on the `UserRepository` protocol only.
+
+## Combine variant
+
+Use `examples/mvvm-swiftui-combine/` when the project already standardises on
+`ObservableObject`, `@Published`, or Combine bindings. Keep the same boundaries:
+the View owns the model with `@StateObject`, the model stays `@MainActor`, and
+repositories are injected through init. If the feature is mainly a stream pipeline
+(search, live feed, debounce, latest request wins), switch to `arch-reactive`.
 
 ## Pros / cons
 
@@ -69,7 +77,7 @@ notice:
 
 ## Anti-patterns
 
-- `@StateObject` / `@ObservedObject` on iOS 17+ (use `@State` + `@Observable`).
+- Accidental `@StateObject` / `@ObservedObject` in new iOS 17 code. Use `@State` + `@Observable` unless this is the deliberate Combine variant.
 - `import SwiftUI` inside the model.
 - Business logic in the View body.
 - Holding `@State` for child models in the wrong owner (causes recreation on parent rerender).
@@ -80,3 +88,18 @@ notice:
 - To MVVM-C: introduce `Router` (see `arch-mvvm-c`).
 - To TCA: see `migrator` primitive P9 — map model properties to `State`, methods to `Action`, async work to `Effect`.
 - To Clean Architecture: pull repository contract into a `Domain` module, inject use-cases instead of repositories.
+
+## Failure modes
+
+- Model imports SwiftUI and starts owning view concerns.
+- Views hold business state because the model feels too small.
+- Child models are recreated on parent rerender.
+- Navigation state is split between views and models.
+
+## Review checklist
+
+- Is the model `@Observable @MainActor` and SwiftUI-free?
+- Are dependencies injected through init?
+- Does `.task` own lifecycle-driven async work?
+- Are loading, empty, failure, and cancellation paths visible in state?
+- Is navigation handed to a router/coordinator when it grows?

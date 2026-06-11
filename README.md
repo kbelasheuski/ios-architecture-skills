@@ -1,15 +1,18 @@
 <h1 align="center">🏗️ iOS Architecture Skills</h1>
 
 <p align="center">
+  <a href="https://github.com/kbelasheuski/ios-architecture-skills/actions/workflows/validate-skills.yml"><img alt="Validate Skills" src="https://img.shields.io/github/actions/workflow/status/kbelasheuski/ios-architecture-skills/validate-skills.yml?branch=main&label=Skills&style=for-the-badge"></a>
   <a href="https://github.com/kbelasheuski/ios-architecture-skills/actions/workflows/examples.yml"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/kbelasheuski/ios-architecture-skills/examples.yml?branch=main&style=for-the-badge"></a>
   <a href="https://github.com/kbelasheuski/ios-architecture-skills/actions/workflows/swiftlint.yml"><img alt="SwiftLint" src="https://img.shields.io/github/actions/workflow/status/kbelasheuski/ios-architecture-skills/swiftlint.yml?branch=main&label=SwiftLint&style=for-the-badge"></a>
+  <a href="https://agentskills.io/home"><img alt="Agent Skills Compatible" src="https://img.shields.io/badge/Agent%20Skills-Compatible-purple?style=for-the-badge"></a>
+  <img alt="Version 0.1.1" src="https://img.shields.io/badge/Version-0.1.1-555?style=for-the-badge">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge"></a>
 </p>
 
 iOS Architect is a plugin-ready skill bundle for choosing, auditing, refactoring,
 and migrating iOS app architectures. It covers MVC, MVP, MVVM (Combine and
-`@Observable`), MVVM-C, VIPER, Clean Swift, Clean Architecture, TCA,
-Redux/ReSwift, RIBs, and modular SPM/Tuist setups.
+`@Observable`), MVVM-C, MVI, Reactive Combine/Rx, Coordinator, VIPER, Clean
+Swift, Clean Architecture, TCA, Redux/ReSwift, RIBs, and modular SPM/Tuist setups.
 
 The bundle is intentionally lean: the installable plugin lives in
 `plugins/ios-architect/`, shared skills live under
@@ -27,7 +30,8 @@ in `plugins/ios-architect/codex-agents/`.
 | `arch-<pattern>` | One per pattern: when to use it, folder layout, trade-offs, corner cases, anti-patterns, and a worked example. |
 
 The agent should route to the most specific skill for the task and only pull in
-heavier reference material when the implementation details matter.
+heavier reference material when the implementation details matter. Shared routing
+notes live in `plugins/ios-architect/references/`.
 
 ## Architectures
 
@@ -36,15 +40,18 @@ heavier reference material when the implementation details matter.
 | 1 | **MVC** | View controller owns everything | UIKit | Prototypes, small UIKit apps |
 | 2 | **MVP** | Passive view + Presenter owns presentation logic | UIKit | UIKit apps that need testable presentation |
 | 3 | **MVVM-UIKit** | ViewModel + bindings | UIKit | Mainstream UIKit production |
-| 4 | **MVVM-SwiftUI** | `@Observable` model + declarative view | SwiftUI | Mainstream SwiftUI production |
+| 4 | **MVVM-SwiftUI** | `@Observable` or Combine model + declarative view | SwiftUI | Mainstream SwiftUI production |
 | 5 | **MVVM-C** | MVVM + Coordinator/Router owns navigation | UIKit and SwiftUI | Medium/large apps, deep-linking |
-| 6 | **VIPER** | View-Interactor-Presenter-Entity-Router | UIKit | Large, long-lived UIKit codebases |
-| 7 | **Clean Swift** | VIP cycle: View -> Interactor -> Presenter -> View | UIKit | VIPER-like boundaries with less routing ceremony |
-| 8 | **Clean Architecture** | Layered Domain/Data/Presentation + Use Cases | UIKit and SwiftUI | Domain-heavy apps with long lifespan |
-| 9 | **TCA** | State/Action/Reducer/Store, unidirectional | SwiftUI | Correctness-critical SwiftUI |
-| 10 | **Redux/ReSwift** | Single global store, pure reducers, middleware | UIKit and SwiftUI | Cross-platform shared logic |
-| 11 | **RIBs** | Router-Interactor-Builder tree | UIKit | Uber-scale teams and deeply nested state |
-| 12 | **Modular/TMA** | Build-graph layer; each feature is a module | UIKit and SwiftUI | Larger teams or codebases; composes with the above |
+| 6 | **MVI** | State + Intent + dispatch, unidirectional | UIKit and SwiftUI | Deterministic feature state without TCA |
+| 7 | **Reactive** | Combine/Rx input streams -> state | UIKit and SwiftUI | Search, live feeds, replacement requests |
+| 8 | **Coordinator** | Navigation layer with typed routes/flows | UIKit and SwiftUI | Deep links and reusable flows |
+| 9 | **VIPER** | View-Interactor-Presenter-Entity-Router | UIKit | Large, long-lived UIKit codebases |
+| 10 | **Clean Swift** | VIP cycle: View -> Interactor -> Presenter -> View | UIKit | VIPER-like boundaries with less routing ceremony |
+| 11 | **Clean Architecture** | Layered Domain/Data/Presentation + Use Cases | UIKit and SwiftUI | Domain-heavy apps with long lifespan |
+| 12 | **TCA** | State/Action/Reducer/Store, unidirectional | SwiftUI | Correctness-critical SwiftUI |
+| 13 | **Redux/ReSwift** | Single global store, pure reducers, middleware | UIKit and SwiftUI | Cross-platform shared logic |
+| 14 | **RIBs** | Router-Interactor-Builder tree | UIKit | Uber-scale teams and deeply nested state |
+| 15 | **Modular/TMA** | Build-graph layer; each feature is a module | UIKit and SwiftUI | Larger teams or codebases; composes with the above |
 
 Full per-pattern analysis is in
 [iOS-Architecture-Comparison.md](iOS-Architecture-Comparison.md), with a score
@@ -105,14 +112,17 @@ Common prompts and the skill they should route to:
 | "Make a plan to migrate from VIPER to TCA" | `migrator` |
 | "Show me the TCA folder structure for a new feature" | `arch-tca` |
 | "What are the corner cases for MVVM-C in SwiftUI?" | `arch-mvvm-c` |
+| "Model this feature as State + Intent without TCA" | `arch-mvi` |
+| "This search screen needs debounce and latest request wins" | `arch-reactive` |
+| "Extract navigation and deep links out of these screens" | `arch-coordinator` |
 
 ## Examples
 
-Eleven examples are SwiftPM packages with XCTest coverage:
+Fourteen examples are SwiftPM packages with XCTest coverage:
 
-`mvc`, `mvp`, `mvvm-uikit`, `mvvm-swiftui`, `mvvm-c`, `viper`,
-`clean-swift`, `clean-architecture`, `tca`, `redux-reswift`, and
-`modular-tma`.
+`mvc`, `mvp`, `mvvm-uikit`, `mvvm-swiftui`, `mvvm-swiftui-combine`,
+`mvvm-c`, `mvi`, `coordinator`, `viper`, `clean-swift`,
+`clean-architecture`, `tca`, `redux-reswift`, and `modular-tma`.
 
 `ribs` remains reference-only because Uber's RIBs framework is not distributed
 through Swift Package Manager.

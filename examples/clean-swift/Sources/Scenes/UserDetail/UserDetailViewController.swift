@@ -48,9 +48,9 @@ final class UserDetailViewController: UIViewController, UserDetailDisplayLogic, 
 
     func displayLoad(_ vm: UserDetail.Load.ViewModel) {
         if let msg = vm.errorMessage {
-            let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
-            alert.addAction(.init(title: "OK", style: .default))
-            present(alert, animated: true)
+            let a = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
+            a.addAction(.init(title: "OK", style: .default))
+            present(a, animated: true)
             return
         }
         nameField.text = vm.name
@@ -72,9 +72,9 @@ final class UserDetailViewController: UIViewController, UserDetailDisplayLogic, 
             router.pop()
         case .failed(let msg):
             activity.stopAnimating()
-            let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
-            alert.addAction(.init(title: "OK", style: .default))
-            present(alert, animated: true)
+            let a = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
+            a.addAction(.init(title: "OK", style: .default))
+            present(a, animated: true)
             updateSaveEnabled()
         }
     }

@@ -50,11 +50,11 @@ public final class UserDetailInteractor:
         }
         .observe(on: MainScheduler.instance)
         .subscribe(
-            onSuccess: { [weak self] fetchedUser in
+            onSuccess: { [weak self] u in
                 guard let self else { return }
-                self.user = fetchedUser
-                self.draftName = fetchedUser.name
-                self.presenter.display(name: fetchedUser.name, email: fetchedUser.email)
+                self.user = u
+                self.draftName = u.name
+                self.presenter.display(name: u.name, email: u.email)
                 self.presenter.setSaveEnabled(false)
             },
             onFailure: { [weak self] error in
@@ -72,13 +72,13 @@ public final class UserDetailInteractor:
     }
 
     public func save() {
-        guard var updatedUser = user, updatedUser.name != draftName, !draftName.isEmpty, !isSaving else { return }
-        updatedUser.name = draftName
+        guard var u = user, u.name != draftName, !draftName.isEmpty, !isSaving else { return }
+        u.name = draftName
         isSaving = true
         presenter.display(saving: true)
         presenter.setSaveEnabled(false)
         Single.fromAsync { [repository] in
-            try await repository.update(updatedUser)
+            try await repository.update(u)
         }
         .observe(on: MainScheduler.instance)
         .subscribe(

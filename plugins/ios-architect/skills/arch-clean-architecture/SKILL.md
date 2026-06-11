@@ -101,3 +101,18 @@ XCTest. Read it there rather than reproducing it here; key things to notice when
 - To TCA at Presentation: keep Domain/Data untouched; replace each VM with a Reducer using Use Cases as `@Dependency`.
 - To Modular/TMA: each layer (`UserDomain`, `UserData`, `UserListFeature`, etc.) becomes its own module with an `Interface` target.
 - Reverse direction (collapsing to MVVM-only): collapse Use Cases into the VM if rules are trivial; keep repository.
+
+## Failure modes
+
+- Domain imports UI or infrastructure.
+- Use Cases are skipped and ViewModels call repositories directly.
+- Repository protocols live beside concrete implementations.
+- Composition root is replaced with a global container.
+
+## Review checklist
+
+- Does every dependency point inward toward Domain?
+- Are business rules in Use Cases, not ViewModels or repositories?
+- Are DTO/domain mappings at the Data boundary?
+- Can Domain tests run without simulator or network?
+- Is dependency construction limited to the composition root?

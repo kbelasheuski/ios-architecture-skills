@@ -288,3 +288,18 @@ final class UserListInteractorTests: XCTestCase {
 - To MVVM-UIKit: collapse Interactor + Presenter → ViewModel; drop Request/Response/ViewModel structs; map Worker to a repository property.
 - To Clean Architecture: promote Worker → Use Case; Interactor's rules → Domain.
 - To TCA: Interactor + Presenter → Reducer; Router → `StackState` Path reducer.
+
+## Failure modes
+
+- Presenter accumulates state and duplicates Interactor state.
+- Request/Response/ViewModel structs become pass-through noise.
+- Worker owns business rules that belong in the Interactor or Domain.
+- Router and DataStore are not wired, so navigation needs view hacks.
+
+## Review checklist
+
+- Does the View talk only to the Interactor?
+- Does the Presenter format data without storing domain state?
+- Are Worker calls async-safe and failure-aware?
+- Are Request/Response/ViewModel types useful contracts?
+- Is routing data exposed through DataStore, not the View?

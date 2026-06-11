@@ -34,8 +34,14 @@ jobs:
             scheme: MVVMUIKitExample
           - path: examples/mvvm-swiftui
             scheme: MVVMSwiftUIExample
+          - path: examples/mvvm-swiftui-combine
+            scheme: MVVMSwiftUICombineExample
           - path: examples/mvvm-c
             scheme: MVVMCExample
+          - path: examples/mvi
+            scheme: MVIExample
+          - path: examples/coordinator
+            scheme: CoordinatorExample
           - path: examples/viper
             scheme: VIPERExample
           - path: examples/clean-swift

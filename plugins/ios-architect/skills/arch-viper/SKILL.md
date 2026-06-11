@@ -38,7 +38,7 @@ Features/
 The full worked `UserList + UserDetail` feature lives in **`examples/viper/`** —
 the seven files per module (Protocols, Entities, Interactor, Presenter,
 ViewController, Router, Builder), with `Domain` + `Data` + test fakes that follow
-`skills/REFERENCE_FEATURE.md` (vendored per example). Key things to notice:
+`plugins/ios-architect/skills/REFERENCE_FEATURE.md` (vendored per example). Key things to notice:
 
 - **`UserList<X>Protocols.swift` is the contract hub** — View↔Presenter↔Interactor↔Router protocols in one file; everything else conforms to it.
 - **The Presenter is the unit under test** — it holds no UIKit; the ViewController is a thin `view` conforming to the View protocol and is mocked in tests.
@@ -70,3 +70,18 @@ ViewController, Router, Builder), with `Domain` + `Data` + test fakes that follo
 - To MVVM-UIKit: collapse Interactor + Presenter → ViewModel; Router → Coordinator; drop Entities (Domain model directly).
 - To Clean Architecture: Interactor's rules → Use Cases (Domain); Presenter → VM (Presentation); Router → Coordinator.
 - To TCA: Presenter → Reducer; Interactor calls → Dependency client; Router → `StackState` Path reducer.
+
+## Failure modes
+
+- Protocols exist, but modules still call concrete types directly.
+- Presenter starts doing Interactor work or importing UIKit.
+- Router owns business decisions instead of navigation.
+- Builders are skipped and composition spreads across the app.
+
+## Review checklist
+
+- Is each VIPER role doing one job?
+- Is the Builder the only public module constructor?
+- Does Presenter remain UI-framework-free?
+- Are Interactor async failures mapped before reaching the View?
+- Are Router and Presenter kept separate?

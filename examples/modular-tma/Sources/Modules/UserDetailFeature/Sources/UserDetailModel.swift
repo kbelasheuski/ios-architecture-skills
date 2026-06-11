@@ -36,9 +36,9 @@ final class UserDetailModel {
     func onAppear() async {
         guard user == nil else { return }
         do {
-            let fetchedUser = try await fetchUser(id: id)
-            user = fetchedUser
-            draftName = fetchedUser.name
+            let u = try await fetchUser(id: id)
+            user = u
+            draftName = u.name
         } catch {
             state = .failed(error.localizedDescription)
         }
@@ -46,11 +46,11 @@ final class UserDetailModel {
 
     @discardableResult
     func save() async -> User? {
-        guard var updatedUser = user, canSave else { return nil }
-        updatedUser.name = draftName
+        guard var u = user, canSave else { return nil }
+        u.name = draftName
         state = .saving
         do {
-            let saved = try await updateUser(updatedUser)
+            let saved = try await updateUser(u)
             user = saved
             draftName = saved.name
             state = .saved

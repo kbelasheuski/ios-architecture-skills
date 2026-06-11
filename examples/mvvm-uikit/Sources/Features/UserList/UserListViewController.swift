@@ -50,15 +50,15 @@ final class UserListViewController: UITableViewController {
 
     @objc private func onPull() { viewModel.refresh() }
 
-    override func tableView(_ tv: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tv: UITableView, numberOfRowsInSection s: Int) -> Int {
         viewModel.users.count
     }
     override func tableView(_ tv: UITableView, cellForRowAt ip: IndexPath) -> UITableViewCell {
         let cell = tv.dequeueReusableCell(withIdentifier: "cell", for: ip)
-        var content = cell.defaultContentConfiguration()
-        content.text = viewModel.users[ip.row].name
-        content.secondaryText = viewModel.users[ip.row].email
-        cell.contentConfiguration = content
+        var c = cell.defaultContentConfiguration()
+        c.text = viewModel.users[ip.row].name
+        c.secondaryText = viewModel.users[ip.row].email
+        cell.contentConfiguration = c
         return cell
     }
     override func tableView(_ tv: UITableView, didSelectRowAt ip: IndexPath) {

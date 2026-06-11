@@ -26,10 +26,10 @@ public final class UserDetailPresenter: UserDetailPresenting {
 
     public func viewDidLoad() async {
         do {
-            let fetchedUser = try await repository.fetchUser(id: id)
-            user = fetchedUser
-            draftName = fetchedUser.name
-            view?.display(name: fetchedUser.name, email: fetchedUser.email)
+            let u = try await repository.fetchUser(id: id)
+            user = u
+            draftName = u.name
+            view?.display(name: u.name, email: u.email)
             view?.setSaveEnabled(false)
         } catch {
             view?.displayError(message: error.localizedDescription)
@@ -42,8 +42,8 @@ public final class UserDetailPresenter: UserDetailPresenting {
     }
 
     public func save() async {
-        guard var updatedUser = user, canSave else { return }
-        updatedUser.name = draftName
+        guard var u = user, canSave else { return }
+        u.name = draftName
         isSaving = true
         view?.displaySaving(true)
         view?.setSaveEnabled(false)
@@ -53,7 +53,7 @@ public final class UserDetailPresenter: UserDetailPresenting {
             view?.setSaveEnabled(canSave)
         }
         do {
-            let saved = try await repository.update(updatedUser)
+            let saved = try await repository.update(u)
             user = saved
             onSaved(saved)
             view?.dismiss()

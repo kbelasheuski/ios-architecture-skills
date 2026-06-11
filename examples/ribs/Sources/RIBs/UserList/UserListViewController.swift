@@ -42,18 +42,18 @@ public final class UserListViewController:
     }
 
     public func displayError(_ message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(.init(title: "OK", style: .default))
-        present(alert, animated: true)
+        let a = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        a.addAction(.init(title: "OK", style: .default))
+        present(a, animated: true)
     }
 
-    public func tableView(_ tv: UITableView, numberOfRowsInSection section: Int) -> Int { rows.count }
+    public func tableView(_ tv: UITableView, numberOfRowsInSection s: Int) -> Int { rows.count }
     public func tableView(_ tv: UITableView, cellForRowAt ip: IndexPath) -> UITableViewCell {
         let cell = tv.dequeueReusableCell(withIdentifier: "cell", for: ip)
-        var content = cell.defaultContentConfiguration()
-        content.text = rows[ip.row].title
-        content.secondaryText = rows[ip.row].subtitle
-        cell.contentConfiguration = content
+        var c = cell.defaultContentConfiguration()
+        c.text = rows[ip.row].title
+        c.secondaryText = rows[ip.row].subtitle
+        cell.contentConfiguration = c
         return cell
     }
     public func tableView(_ tv: UITableView, didSelectRowAt ip: IndexPath) {

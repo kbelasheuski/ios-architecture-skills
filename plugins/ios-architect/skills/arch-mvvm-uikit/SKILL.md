@@ -279,3 +279,18 @@ func waitFor<T>(_ p: Published<T>.Publisher, count: Int, timeout: TimeInterval =
 - To MVVM-C: introduce Coordinator that subscribes to `userSelected`/`didSave`.
 - To MVVM-SwiftUI: rewrite VC as `View`, swap `@Published` for `@Observable`.
 - To TCA: P9 — VM → Reducer, `@Published` → `State`, methods → `Action`, async → `Effect`.
+
+## Failure modes
+
+- ViewModel imports UIKit and becomes a controller by another name.
+- Combine subscriptions are created in cells or reused without cancellation.
+- One-shot events are modeled as sticky `@Published` state.
+- Navigation stays in the ViewController and cannot be tested.
+
+## Review checklist
+
+- Are outputs `@Published` state and one-shot events separated?
+- Is the ViewModel `@MainActor` or otherwise main-thread safe?
+- Are cancellables owned by the lifecycle that created them?
+- Can the ViewModel be tested without UIKit?
+- Is navigation ready to move into a Coordinator?

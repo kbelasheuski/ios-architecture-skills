@@ -28,10 +28,10 @@ public final class UserDetailPresenter: UserDetailPresenterProtocol {
 
     public func viewDidLoad() async {
         do {
-            let fetchedUser = try await interactor.fetch(id: id)
-            user = fetchedUser
-            draftName = fetchedUser.name
-            view?.display(name: fetchedUser.name, email: fetchedUser.email)
+            let u = try await interactor.fetch(id: id)
+            user = u
+            draftName = u.name
+            view?.display(name: u.name, email: u.email)
             view?.setSaveEnabled(false)
         } catch {
             view?.displayError(message: error.localizedDescription)
@@ -44,8 +44,8 @@ public final class UserDetailPresenter: UserDetailPresenterProtocol {
     }
 
     public func save() async {
-        guard var updatedUser = user, canSave else { return }
-        updatedUser.name = draftName
+        guard var u = user, canSave else { return }
+        u.name = draftName
         isSaving = true
         view?.displaySaving(true)
         view?.setSaveEnabled(false)
@@ -55,7 +55,7 @@ public final class UserDetailPresenter: UserDetailPresenterProtocol {
             view?.setSaveEnabled(canSave)
         }
         do {
-            user = try await interactor.update(updatedUser)
+            user = try await interactor.update(u)
             router.pop()
         } catch {
             view?.displayError(message: error.localizedDescription)

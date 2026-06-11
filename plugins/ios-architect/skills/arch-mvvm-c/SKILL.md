@@ -50,7 +50,7 @@ Sources/
 The full worked `UserList + UserDetail` feature lives in **`examples/mvvm-c/`**,
 implemented as the **SwiftUI Router variant** — an `@Observable @MainActor AppRouter`
 holding a `[Route]` path, MVVM models per feature, and `Domain` + `Data` that follow
-`skills/REFERENCE_FEATURE.md` (vendored per example). Key things to notice:
+`plugins/ios-architect/skills/REFERENCE_FEATURE.md` (vendored per example). Key things to notice:
 
 - **The router is the coordinator** — `AppRouter.path` drives a `NavigationStack(path:)`; models trigger navigation through an injected closure, not by holding the router type.
 - **`Route` is a `Hashable` enum** — deep-linking and programmatic navigation reduce to appending routes.
@@ -90,3 +90,18 @@ holding a `[Route]` path, MVVM models per feature, and `Domain` + `Data` that fo
 - To VIPER: extract Interactor (rules) + Presenter (formatting) out of VM; Coordinator becomes Router.
 - To TCA: replace AppRouter with TCA `StackState`/`StackActionOf`; merge VM into Reducer.
 - To Clean Architecture: pull repository contracts into a Domain module; introduce Use Cases.
+
+## Failure modes
+
+- Coordinator becomes a service locator.
+- ViewModel holds the concrete coordinator instead of emitting navigation events.
+- SwiftUI route path has several owners.
+- UIKit child coordinators are retained forever.
+
+## Review checklist
+
+- Is navigation owned by one coordinator/router per flow?
+- Are routes typed values or explicit coordinator methods?
+- Do models expose callbacks or route intents, not concrete navigation objects?
+- Are deep links parsed and tested outside views?
+- Are child coordinators released when flows finish?

@@ -74,10 +74,13 @@ and domain boundaries. If those point elsewhere, say so and explain the trade-of
 3. **Regulated domain (banking, healthcare, fintech) with audit-trail requirements** → Clean Architecture (layered) + MVVM at Presentation, optional VIPER per critical screen. Modularise early.
 4. **Team ≥ 5 OR ≥ 30 screens at launch** → modularisation (Modular/TMA) becomes a strong default; the win is build-graph and ownership isolation, so weigh it against actual module boundaries and CI cost rather than screen count alone. Choose the in-module pattern from the rest of the list.
 5. **Greenfield SwiftUI + correctness-critical (payments, scheduling, multi-step flows with side effects)** → TCA + Modular, *if* the team has or will invest in the learning curve. Otherwise MVVM-SwiftUI + Clean layering.
-6. **Greenfield SwiftUI, medium product, mixed-seniority team** → MVVM-SwiftUI + Clean Architecture layering inside each feature module.
-7. **Cross-platform business logic shared with Android, no KMM** → Redux/ReSwift (logic portable as plain Swift), or push toward KMM and keep MVVM on the iOS side.
-8. **Uber-scale: ≥ 30 iOS engineers AND deeply nested, persistent state hierarchy** → RIBs. Below that scale, the cost rarely pays off.
-9. **Default fallback** → MVVM-SwiftUI (`@Observable`) + SPM workspace, Clean layering inside each feature.
+6. **State-machine-heavy feature, but no TCA dependency accepted** → MVI for that feature, usually with MVVM/Clean around it.
+7. **Search, live feeds, or replacement requests dominate the feature** → Reactive Combine/Rx inside MVVM, MVP, VIPER, or Clean.
+8. **Deep links or reusable flows are a primary risk** → add Coordinator as the navigation layer; it is not the whole architecture.
+9. **Greenfield SwiftUI, medium product, mixed-seniority team** → MVVM-SwiftUI + Clean Architecture layering inside each feature module.
+10. **Cross-platform business logic shared with Android, no KMM** → Redux/ReSwift (logic portable as plain Swift), or push toward KMM and keep MVVM on the iOS side.
+11. **Uber-scale: ≥ 30 iOS engineers AND deeply nested, persistent state hierarchy** → RIBs. Below that scale, the cost rarely pays off.
+12. **Default fallback** → MVVM-SwiftUI (`@Observable`) + SPM workspace, Clean layering inside each feature.
 
 ## Output format
 
@@ -116,3 +119,19 @@ Suggested next skill: arch-<pattern>
 ## Hand-off
 
 After delivering the recommendation, suggest the user run the `arch-<pattern>` skill to scaffold the first feature, and (if migration from any existing code is in play) point to `migrator`.
+
+## Failure modes
+
+- Recommendation is based on taste instead of stated constraints.
+- Team skill, dependency tolerance, or CI budget is ignored.
+- Modularisation is treated as the same choice as in-module architecture.
+- A heavy pattern is chosen for a small short-lived app.
+- A provisional recommendation is presented as final.
+
+## Review checklist
+
+- Are product shape, team size, UI stack, and deployment target known or stated as assumptions?
+- Is the primary recommendation tied to 1-2 concrete constraints?
+- Is there a fallback with a clear trade-off?
+- Are modularisation and presentation architecture separated?
+- Does the hand-off name the next exact skill to use?

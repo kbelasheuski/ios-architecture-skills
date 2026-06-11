@@ -1,6 +1,6 @@
 # iOS Architecture Patterns — Advantages, Disadvantages & Comparison
 
-*A senior architect's reference for choosing an iOS app architecture (UIKit & SwiftUI). Covers 12 patterns with side-by-side comparison tables and per-pattern analysis.*
+*A senior architect's reference for choosing an iOS app architecture (UIKit & SwiftUI). Covers 15 patterns and architecture layers with side-by-side comparison notes and per-pattern analysis.*
 
 ---
 
@@ -8,7 +8,7 @@
 
 This is a **decision document**, not a tutorial. It assumes you already know what a view controller, a reducer, and a coordinator are. Each pattern gets a short verdict, a pros/cons list, a "when to use / when to reject" call, and notes on how it fits UIKit vs SwiftUI.
 
-The ratings are **relative to each other**, not absolute. A "★★☆☆☆" for testability on MVC does not mean MVC is untestable — it means it is hard *compared to* VIPER or TCA. Ratings are a senior-engineer consensus synthesized from the sources listed at the end, plus a working reference bundle of all 12 patterns (compilable UIKit/SwiftUI examples that build and pass tests on Xcode).
+The ratings are **relative to each other**, not absolute. A "★★☆☆☆" for testability on MVC does not mean MVC is untestable — it means it is hard *compared to* VIPER or TCA. Ratings are a senior-engineer consensus synthesized from the sources listed at the end, plus a working reference bundle of buildable UIKit/SwiftUI examples that build and pass tests on Xcode.
 
 **Rating scale:** ★☆☆☆☆ (poor / very high cost) → ★★★★★ (excellent / very low cost). For "cost" rows (boilerplate, learning curve), more stars = *less* cost / easier.
 
@@ -16,7 +16,7 @@ The single most important thing in this document: **there is no best architectur
 
 ---
 
-## The 12 patterns at a glance
+## The 15 patterns at a glance
 
 | # | Pattern | One-line identity | Primary UI fit | Sweet spot |
 |---|---------|-------------------|----------------|------------|
@@ -25,21 +25,24 @@ The single most important thing in this document: **there is no best architectur
 | 3 | **MVVM (UIKit)** | ViewModel + bindings (Combine/closures) | UIKit | Mainstream UIKit production apps |
 | 4 | **MVVM (SwiftUI)** | `@Observable` model + declarative view | SwiftUI | Mainstream SwiftUI production apps |
 | 5 | **MVVM-C** | MVVM + Coordinator/Router owns navigation | UIKit & SwiftUI | Medium/large apps with deep-linking |
-| 6 | **VIPER** | View-Interactor-Presenter-Entity-Router | UIKit | Large, long-lived UIKit apps, big teams |
-| 7 | **Clean Swift (VIP)** | Cycle: View→Interactor→Presenter→View | UIKit | Teams wanting VIPER rigor, less routing ceremony |
-| 8 | **Clean Architecture** | Layered: Domain / Data / Presentation + Use Cases | UIKit & SwiftUI | Domain-heavy apps, long lifespan |
-| 9 | **TCA** | State/Action/Reducer/Store, unidirectional | SwiftUI | Correctness-critical SwiftUI, capable team |
-| 10 | **Redux / ReSwift** | Single global store, pure reducers, middleware | UIKit & SwiftUI | Cross-platform shared logic, Redux background |
-| 11 | **RIBs** (Uber) | Router-Interactor-Builder tree, Rx-driven | UIKit | Uber-scale (30+ engineers), nested state |
-| 12 | **Modular / TMA** | Build-graph layer; each feature is a module | UIKit & SwiftUI | ≥5 devs or ≥30 screens (composes *with* the above) |
+| 6 | **MVI** | State + Intent + dispatch | UIKit & SwiftUI | Deterministic feature state without TCA |
+| 7 | **Reactive** | Combine/Rx input streams -> state | UIKit & SwiftUI | Search, live feeds, replacement requests |
+| 8 | **Coordinator** | Navigation layer with typed routes/flows | UIKit & SwiftUI | Deep links and reusable flows |
+| 9 | **VIPER** | View-Interactor-Presenter-Entity-Router | UIKit | Large, long-lived UIKit apps, big teams |
+| 10 | **Clean Swift (VIP)** | Cycle: View→Interactor→Presenter→View | UIKit | Teams wanting VIPER rigor, less routing ceremony |
+| 11 | **Clean Architecture** | Layered: Domain / Data / Presentation + Use Cases | UIKit & SwiftUI | Domain-heavy apps, long lifespan |
+| 12 | **TCA** | State/Action/Reducer/Store, unidirectional | SwiftUI | Correctness-critical SwiftUI, capable team |
+| 13 | **Redux / ReSwift** | Single global store, pure reducers, middleware | UIKit & SwiftUI | Cross-platform shared logic, Redux background |
+| 14 | **RIBs** (Uber) | Router-Interactor-Builder tree, Rx-driven | UIKit | Uber-scale (30+ engineers), nested state |
+| 15 | **Modular / TMA** | Build-graph layer; each feature is a module | UIKit & SwiftUI | ≥5 devs or ≥30 screens (composes *with* the above) |
 
-> **Note on #12:** Modular/TMA is *orthogonal* to the others. It is not a UI pattern — it is how you slice the codebase into Tuist/SPM modules. You pick MVVM **or** TCA **or** Clean *inside* each module, and layer Modular/TMA on top. It is included because at scale it dominates the build-time and team-autonomy conversation.
+> **Note on #7, #8, and #15:** Reactive, Coordinator, and Modular/TMA are often layers rather than the whole app architecture. Pair Reactive with MVVM/MVP/VIPER/Clean, pair Coordinator with a presentation pattern, and layer Modular/TMA over whichever in-module pattern you choose.
 
 ---
 
-## Master comparison matrix
+## Core structural comparison matrix
 
-Higher stars = better outcome / lower cost.
+Higher stars = better outcome / lower cost. This matrix keeps the original core structural patterns readable. MVI, Reactive, and Coordinator are covered in the addendum below because they are often feature or layer choices rather than whole-app choices.
 
 | Category | MVC | MVP | MVVM-UIKit | MVVM-SwiftUI | MVVM-C | VIPER | Clean Swift | Clean Arch | TCA | Redux | RIBs | Modular |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -73,8 +76,10 @@ Higher stars = better outcome / lower cost.
 | Prototyping / hackathon / ≤20 screens | MVC, MVVM-SwiftUI | VIPER, TCA, RIBs |
 | Solo dev, new SwiftUI app | MVVM-SwiftUI (or plain MV) | VIPER, RIBs |
 | Small team, new SwiftUI app, correctness matters | TCA (if 1+ has shipped it), else MVVM-SwiftUI + Coordinator | RIBs |
+| Feature needs explicit state-machine transitions, no TCA dependency | MVI | MVC |
+| Search/live feed/debounce/replacement requests dominate | Reactive inside MVVM/MVP/Clean | Plain callback soup |
 | Mainstream UIKit production app | MVVM-UIKit or MVVM-C | RIBs, Redux |
-| Deep-linking / complex flows | MVVM-C | MVC, MVP |
+| Deep-linking / complex flows | Coordinator or MVVM-C | MVC, MVP |
 | Large UIKit app, big team, long lifespan | VIPER or Clean Architecture | MVC |
 | Domain/business-rule-heavy app | Clean Architecture | MVC, MVP |
 | Cross-platform shared logic (Android Redux/KMP) | Redux / ReSwift | VIPER |
@@ -198,7 +203,20 @@ The view controller *is* the unit under test, with no layer between it and the d
 
 ---
 
-### 6. VIPER
+### Addendum: MVI, Reactive, Coordinator
+
+**MVI** is the no-framework state-machine option: `State`, `Intent`, and a single
+dispatch path. It fits features where transitions matter more than screen count.
+
+**Reactive** is a stream layer. Use it when Combine/Rx operators express the real
+behavior: debounce, throttle, `switchToLatest`, retry, fan-out, or live feeds.
+
+**Coordinator** is a navigation layer. Use it when route ownership, deep links, or
+flow reuse are the real problem. It pairs well with MVVM, MVP, Clean, and TCA.
+
+---
+
+### 9. VIPER
 
 **Verdict:** Maximum separation of concerns. View, Interactor (business), Presenter (formatting), Entity, Router. The lowest coupling of any mainstream iOS pattern — and the highest boilerplate. Earns its keep only on large, long-lived UIKit codebases with big teams.
 
@@ -220,7 +238,7 @@ The view controller *is* the unit under test, with no layer between it and the d
 
 ---
 
-### 7. Clean Swift (VIP)
+### 10. Clean Swift (VIP)
 
 **Verdict:** VIPER's sibling with a unidirectional cycle (View → Interactor → Presenter → View) per scene. Keeps the rigor and testability, trades some of VIPER's routing ceremony for a tighter cycle.
 
@@ -242,7 +260,7 @@ The view controller *is* the unit under test, with no layer between it and the d
 
 ---
 
-### 8. Clean Architecture (layered)
+### 11. Clean Architecture (layered)
 
 **Verdict:** Not a UI pattern but a layering discipline — Domain (entities + Use Cases), Data (repositories), Presentation (MVVM/VIP/TCA). Makes the core business logic independent of frameworks, UI, and data sources. The strongest choice for domain-heavy, long-lived apps.
 
@@ -264,7 +282,7 @@ The view controller *is* the unit under test, with no layer between it and the d
 
 ---
 
-### 9. TCA (The Composable Architecture)
+### 12. TCA (The Composable Architecture)
 
 **Verdict:** Point-Free's SwiftUI-first framework. State / Action / Reducer / Store with unidirectional flow and exhaustive testing via `TestStore`. Best-in-class testability and stability for correctness-critical SwiftUI — if the team can absorb the curve and the lock-in.
 
@@ -288,7 +306,7 @@ The view controller *is* the unit under test, with no layer between it and the d
 
 ---
 
-### 10. Redux / ReSwift
+### 13. Redux / ReSwift
 
 **Verdict:** Single global store, pure reducers, side effects in middleware. Predictable and replayable; strongest when sharing logic/semantics across platforms. For greenfield SwiftUI, TCA generally supersedes it.
 
@@ -310,7 +328,7 @@ The view controller *is* the unit under test, with no layer between it and the d
 
 ---
 
-### 11. RIBs (Uber)
+### 14. RIBs (Uber)
 
 **Verdict:** A hierarchical Router-Interactor-Builder tree, RxSwift-driven, with Builder/Component DI. Proven at hundreds-of-engineers scale. Highest boilerplate of any pattern; justified *only* at Uber scale with deeply nested persistent state. Reject by default.
 
@@ -334,7 +352,7 @@ The view controller *is* the unit under test, with no layer between it and the d
 
 ---
 
-### 12. Modular / TMA (The Modular Architecture)
+### 15. Modular / TMA (The Modular Architecture)
 
 **Verdict:** The build-graph layer, not a UI pattern. Each feature is a Tuist or SPM module with `Interface` / `Sources` / `Tests` / `Example` targets; you pick MVVM/TCA/Clean *inside* each module. At scale it is the single biggest lever on build time and team autonomy.
 
@@ -364,7 +382,7 @@ The architecture choice is increasingly downstream of the UI-framework choice:
 
 - **UIKit projects** gravitate to MVC → MVP → MVVM-UIKit → MVVM-C → VIPER/Clean Swift as they scale. RIBs sits at the far end.
 - **SwiftUI projects** gravitate to MVVM-SwiftUI (or plain MV) → MVVM-C → TCA / Clean Architecture as correctness needs rise.
-- **Patterns that bridge both:** MVVM-C, Clean Architecture, Redux, and Modular/TMA work in either world.
+- **Patterns that bridge both:** MVVM-C, MVI, Reactive, Coordinator, Clean Architecture, Redux, and Modular/TMA work in either world.
 - **The `@Observable` shift (iOS 17+)** materially changed SwiftUI architecture: precise invalidation, less Combine plumbing, and a live debate about whether a separate ViewModel layer is still warranted. The honest answer: add a ViewModel where a screen has real logic; skip it where `@State` suffices.
 
 ## On "AI-friendliness"
@@ -385,7 +403,7 @@ LLM coding agents do best with architectures that have **small files, predictabl
 
 ## Sources
 
-Synthesized from a working reference bundle of all 12 patterns (compilable UIKit/SwiftUI examples that build and pass tests on Xcode), plus the following:
+Synthesized from a working reference bundle of buildable UIKit/SwiftUI examples that build and pass tests on Xcode, plus the following:
 
 - Max, *The Ultimate Guide to Modern iOS Architecture in 2025* — https://medium.com/@csmax/the-ultimate-guide-to-modern-ios-architecture-in-2025-9f0d5fdc892f
 - Chandra Welim, *iOS Architecture in 2026: Which One Should You Actually Use?* — https://medium.com/@chandra.welim/ios-architecture-in-2026-which-one-should-you-actually-use-793917181411
@@ -410,5 +428,3 @@ Synthesized from a working reference bundle of all 12 patterns (compilable UIKit
 - ReSwift/ReSwift — https://github.com/ReSwift/ReSwift
 
 *Ratings are a senior-engineer synthesis and are inherently judgment calls; treat them as a starting point for your own context, not as benchmarks.*
-
-

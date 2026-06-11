@@ -1,7 +1,7 @@
 {
   "name": "ios-architect",
-  "version": "1.0.0",
-  "description": "Senior iOS architect (20y). Choose, audit, migrate, and implement iOS app architectures across UIKit and SwiftUI. 3 meta-skills + 12 pattern skills.",
+  "version": "0.1.1",
+  "description": "Choose, audit, migrate, and implement iOS app architectures across UIKit and SwiftUI.",
   "author": {
     "name": "Kiryl Belasheuski",
     "url": "https://github.com/kbelasheuski"
@@ -16,6 +16,9 @@
     "swiftui",
     "uikit",
     "mvvm",
+    "mvi",
+    "combine",
+    "coordinator",
     "viper",
     "tca",
     "clean-architecture"

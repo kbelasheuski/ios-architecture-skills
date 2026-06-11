@@ -42,7 +42,7 @@ Domain/
 
 The full worked `UserList + UserDetail` feature lives in **`examples/tca/`** —
 `@Reducer` features with `@ObservableState`, a `UserClient` dependency, SwiftUI
-views bound to `Store`, and `TestStore` tests. The shared `Domain` follows `skills/REFERENCE_FEATURE.md`; the example vendors its
+views bound to `Store`, and `TestStore` tests. The shared `Domain` follows `plugins/ios-architect/skills/REFERENCE_FEATURE.md`; the example vendors its
 own copy under `Sources/Domain`.
 
 > **Requires the `swift-composable-architecture` package** (pointfreeco), wired in
@@ -95,3 +95,18 @@ Key things to notice:
 - To MVVM-SwiftUI: flatten Reducer → `@Observable` model; State props → properties; Action cases → methods.
 - To Clean Architecture: keep TCA at Presentation; pull non-trivial business rules into Use Cases called from `Effect.run`.
 - To Modular/TMA: each feature module exposes its `Reducer` type + `View` from its `Interface` target.
+
+## Failure modes
+
+- Effects mutate state directly instead of sending actions.
+- Long-running effects have no cancellation ID.
+- Dependency clients call live services in tests.
+- Feature state grows because child reducers are not scoped.
+
+## Review checklist
+
+- Are all mutations inside reducers?
+- Are effects cancellable and failure-aware?
+- Does `TestStore` assert important state transitions and effects?
+- Are dependencies injected through `@Dependency`?
+- Are child features scoped instead of flattened into one reducer?

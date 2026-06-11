@@ -49,7 +49,7 @@ RIBs/
 
 The worked `Root → UserList → UserDetail` RIB tree lives in **`examples/ribs/`** —
 Builder/Component/Interactor/Router/ViewController per RIB, with the Root wiring
-UserList as its initial child. `Domain` + `Data` follow `skills/REFERENCE_FEATURE.md` (vendored per example).
+UserList as its initial child. `Domain` + `Data` follow `plugins/ios-architect/skills/REFERENCE_FEATURE.md` (vendored per example).
 
 > **Requires Uber's `RIBs` framework + `RxSwift`.** RIBs is not distributed via
 > SPM, so this example is readable reference code, not a standalone-buildable
@@ -88,3 +88,18 @@ Key things to notice:
 - To MVVM-C: Interactor → ViewModel; Router → Coordinator; drop Rx for Combine; drop Builder/Component for a small DI container.
 - To TCA: P9 per RIB; tree → composed reducers; Rx → async/await + Effects.
 - To Modular/TMA: each RIB folder becomes a Tuist/SPM module exposing its Builder.
+
+## Failure modes
+
+- Child RIBs attach but never detach.
+- Listener references are strong.
+- Components leak dependencies sideways instead of down the tree.
+- Router performs business logic because Interactor boundaries are unclear.
+
+## Review checklist
+
+- Does each RIB have clear Builder, Component, Interactor, Router, and View roles?
+- Are child attach/detach paths tested or easy to reason about?
+- Are listener references weak?
+- Are dependencies provided by Components, not globals?
+- Is Rx bridged safely when async/await is introduced?

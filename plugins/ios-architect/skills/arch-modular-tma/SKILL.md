@@ -153,3 +153,18 @@ Each `Package.swift` declares two products per feature: `<Name>Interface` and `<
 - Combine with any in-module pattern: see `arch-mvvm-swiftui`, `arch-clean-architecture`, `arch-tca`, etc.
 - From a monolith: P10 (split into modules) first, then per-feature pattern migrations from `migrator`.
 - Tooling: `tuist generate`, `tuist focus <FeatureName>` to compile only one feature.
+
+## Failure modes
+
+- `Interface` target exposes implementation types.
+- Feature modules import sibling `Sources` targets.
+- One shared module becomes the new monolith.
+- The app target reaches around factories and constructs feature internals.
+
+## Review checklist
+
+- Does the compiler enforce Interface/Sources boundaries?
+- Does the app depend on feature interfaces only?
+- Are public APIs small and stable?
+- Are test-support fakes kept out of production targets?
+- Is the module split justified by ownership, build time, or reuse?

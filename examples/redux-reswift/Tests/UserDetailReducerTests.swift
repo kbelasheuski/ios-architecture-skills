@@ -4,24 +4,24 @@ import XCTest
 final class UserDetailReducerTests: XCTestCase {
 
     func test_loaded_setsUserAndDraftName() {
-        var state: UserDetailState? = .init()
+        var s: UserDetailState? = .init()
         let user = User.fixture(name: "Ada")
-        state = userDetailReducer(action: .loaded(user), state: state)
-        XCTAssertEqual(state?.user?.name, "Ada")
-        XCTAssertEqual(state?.draftName, "Ada")
+        s = userDetailReducer(action: .loaded(user), state: s)
+        XCTAssertEqual(s?.user?.name, "Ada")
+        XCTAssertEqual(s?.draftName, "Ada")
     }
 
     func test_saveTapped_setsIsSaving() {
-        var state = UserDetailState(user: .fixture(name: "Ada"))
-        state.draftName = "Ada Lovelace"
-        let next = userDetailReducer(action: .saveTapped, state: state)
+        var s = UserDetailState(user: .fixture(name: "Ada"))
+        s.draftName = "Ada Lovelace"
+        let next = userDetailReducer(action: .saveTapped, state: s)
         XCTAssertEqual(next?.isSaving, true)
     }
 
     func test_saved_updatesUserAndClearsSaving() {
-        var state = UserDetailState(user: .fixture(name: "Ada"))
-        state.isSaving = true
-        let next = userDetailReducer(action: .saved(.fixture(name: "Ada Lovelace")), state: state)
+        var s = UserDetailState(user: .fixture(name: "Ada"))
+        s.isSaving = true
+        let next = userDetailReducer(action: .saved(.fixture(name: "Ada Lovelace")), state: s)
         XCTAssertEqual(next?.user?.name, "Ada Lovelace")
         XCTAssertEqual(next?.isSaving, false)
     }

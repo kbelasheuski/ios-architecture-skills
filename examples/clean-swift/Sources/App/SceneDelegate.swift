@@ -10,9 +10,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let repo: UserRepository = LiveUserRepository(baseURL: URL(string: "https://api.example.com")!)
         let root = UserListConfigurator.make(repository: repo)
         let nav = UINavigationController(rootViewController: root)
-        let appWindow = UIWindow(windowScene: ws)
-        appWindow.rootViewController = nav
-        appWindow.makeKeyAndVisible()
-        window = appWindow
+        let w = UIWindow(windowScene: ws)
+        w.rootViewController = nav
+        w.makeKeyAndVisible()
+        window = w
     }
 }

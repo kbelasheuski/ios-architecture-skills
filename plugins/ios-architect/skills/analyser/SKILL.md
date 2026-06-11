@@ -38,6 +38,8 @@ how state flows. Never report a pattern from grep counts alone.
 | TCA markers | `grep -rE "@Reducer\|Effect<\|@ObservableState" --include="*.swift"` | TCA |
 | RIBs markers | `grep -rE "Routing\|Buildable\|Interactor:" --include="*.swift"` | RIBs |
 | ReSwift markers | `grep -rE "ReSwift\|StoreSubscriber\|@MainActor.*Action" --include="*.swift"` | Redux |
+| MVI markers | `grep -rE "Intent\|dispatch\\(\|struct State" --include="*.swift"` | MVI |
+| Reactive markers | `grep -rE "AnyPublisher\|PassthroughSubject\|switchToLatest\|DisposeBag" --include="*.swift"` | Reactive Combine/Rx |
 | Observation usage | `grep -rE "@Observable\|@ObservableState" --include="*.swift"` | iOS 17 modernity |
 | Combine usage | `grep -r "@Published" --include="*.swift" \| wc -l` | ObservableObject MVVM |
 | Modularity | `find . -name "Package.swift"`, `find . -name "Project.swift"` | SPM / Tuist modules |
@@ -67,7 +69,9 @@ engineer to confirm before any recommendation depends on the classification.
 | `Interactor` + `Presenter` + `Router` + `Entity` + `Builder` per screen | VIPER |
 | `Interactor` + `Presenter` + `Worker` + `Models.swift` (Request/Response/ViewModel) | Clean Swift (VIP) |
 | `@Reducer`, `Effect`, `Store` | TCA |
+| Feature `State` + `Intent` + `dispatch` without TCA dependency | MVI |
 | `Store`, `Reducer`, `Action` enum, but no `@Reducer` macro | Redux/ReSwift |
+| `AnyPublisher`/Rx streams, debounce/throttle/latest pipelines | Reactive layer (note alongside primary pattern) |
 | `Buildable`, `Routing`, `Component`, Rx-heavy | RIBs |
 | Folder `Domain/` + `Data/` + `Presentation/` with repository protocols | Clean Architecture (layered) |
 | Multiple SPM packages or Tuist modules — orthogonal axis | Modular / TMA (note alongside primary) |
@@ -169,3 +173,19 @@ Hand off to: migrator  (with from=<current>, to=<target>)
 After producing the audit, point to:
 - `arch-<pattern>` skill — for in-place refactor conventions.
 - `migrator` skill — for cross-pattern migration playbook.
+
+## Failure modes
+
+- Grep counts are treated as proof.
+- Mixed architecture pockets are hidden to make the answer cleaner.
+- Missing tests are ignored when recommending migration.
+- File-size and wiring evidence is not cited.
+- The recommendation changes architecture when a local refactor would solve the pain.
+
+## Review checklist
+
+- Were representative files opened after coarse search?
+- Is the detected pattern reported with confidence?
+- Are mixed pockets and modularisation called out separately?
+- Does every major finding cite concrete evidence?
+- Is the output clearly refactor-in-place or migrate, not both at once?

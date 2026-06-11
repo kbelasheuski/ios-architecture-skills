@@ -29,19 +29,19 @@ final class UserListViewController: UITableViewController, UserListDisplayLogic 
         tableView.reloadData()
         if viewModel.loading == .none { refreshControl?.endRefreshing() }
         if let msg = viewModel.errorMessage {
-            let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
-            alert.addAction(.init(title: "OK", style: .default))
-            present(alert, animated: true)
+            let a = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
+            a.addAction(.init(title: "OK", style: .default))
+            present(a, animated: true)
         }
     }
 
-    override func tableView(_ tv: UITableView, numberOfRowsInSection section: Int) -> Int { rows.count }
+    override func tableView(_ tv: UITableView, numberOfRowsInSection s: Int) -> Int { rows.count }
     override func tableView(_ tv: UITableView, cellForRowAt ip: IndexPath) -> UITableViewCell {
         let cell = tv.dequeueReusableCell(withIdentifier: "cell", for: ip)
-        var content = cell.defaultContentConfiguration()
-        content.text = rows[ip.row].title
-        content.secondaryText = rows[ip.row].subtitle
-        cell.contentConfiguration = content
+        var c = cell.defaultContentConfiguration()
+        c.text = rows[ip.row].title
+        c.secondaryText = rows[ip.row].subtitle
+        cell.contentConfiguration = c
         return cell
     }
     override func tableView(_ tv: UITableView, didSelectRowAt ip: IndexPath) {

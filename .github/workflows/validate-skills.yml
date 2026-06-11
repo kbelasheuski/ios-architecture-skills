@@ -1,0 +1,62 @@
+name: Validate Skills
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - "plugins/ios-architect/**"
+      - ".agents/plugins/marketplace.json"
+      - ".claude-plugin/marketplace.json"
+      - ".github/workflows/validate-skills.yml"
+  pull_request:
+    paths:
+      - "README.md"
+      - "plugins/ios-architect/**"
+      - ".agents/plugins/marketplace.json"
+      - ".claude-plugin/marketplace.json"
+      - ".github/workflows/validate-skills.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Agent Skills
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.3
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install validator
+        run: python -m pip install "git+https://github.com/agentskills/agentskills.git@5d4c1fda3f786fff826c7f56b6cb3341e7f3a911#subdirectory=skills-ref"
+
+      - name: Validate skill folders
+        run: |
+          set -euo pipefail
+          find plugins/ios-architect/skills -mindepth 1 -maxdepth 1 -type d \
+            -exec test -f "{}/SKILL.md" \; -print \
+            | sort \
+            | while read -r skill; do
+                python -m skills_ref.cli validate "$skill"
+              done
+
+      - name: Check required review sections
+        run: |
+          set -euo pipefail
+          missing=0
+          for file in plugins/ios-architect/skills/*/SKILL.md; do
+            grep -q '^## Failure [Mm]odes$' "$file" || { echo "$file: missing Failure modes"; missing=1; }
+            grep -q '^## Review [Cc]hecklist$' "$file" || { echo "$file: missing Review checklist"; missing=1; }
+          done
+          exit "$missing"

@@ -1,26 +1,26 @@
 import Foundation
 
 public func userDetailReducer(action: UserDetailAction, state: UserDetailState?) -> UserDetailState? {
-    var nextState = state ?? UserDetailState()
+    var s = state ?? UserDetailState()
     switch action {
     case .load:
-        nextState = .init()
-    case .loaded(let user):
-        nextState.user = user
-        nextState.draftName = user.name
-    case .nameChanged(let name):
-        nextState.draftName = name
+        s = .init()
+    case .loaded(let u):
+        s.user = u
+        s.draftName = u.name
+    case .nameChanged(let n):
+        s.draftName = n
     case .saveTapped:
-        nextState.isSaving = true
-    case .saved(let user):
-        nextState.user = user
-        nextState.draftName = user.name
-        nextState.isSaving = false
+        s.isSaving = true
+    case .saved(let u):
+        s.user = u
+        s.draftName = u.name
+        s.isSaving = false
     case .failed(let msg):
-        nextState.isSaving = false
-        nextState.errorMessage = msg
+        s.isSaving = false
+        s.errorMessage = msg
     case .dismissed:
         return nil
     }
-    return nextState
+    return s
 }

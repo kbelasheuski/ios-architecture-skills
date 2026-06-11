@@ -17,20 +17,20 @@ public final class UserDetailInteractor: UserDetailBusinessLogic {
 
     public func load(_ request: UserDetail.Load.Request) async {
         do {
-            let fetchedUser = try await worker.fetch(id: request.id)
-            self.user = fetchedUser
-            await presenter.presentLoad(.init(result: .success(fetchedUser)))
+            let u = try await worker.fetch(id: request.id)
+            self.user = u
+            await presenter.presentLoad(.init(result: .success(u)))
         } catch {
             await presenter.presentLoad(.init(result: .failure(.init(message: error.localizedDescription))))
         }
     }
 
     public func save(_ request: UserDetail.Save.Request) async {
-        guard var updatedUser = user else { return }
-        updatedUser.name = request.name
-        await presenter.presentSave(.init(result: .success(updatedUser)))   // saving status
+        guard var u = user else { return }
+        u.name = request.name
+        await presenter.presentSave(.init(result: .success(u)))   // saving status
         do {
-            let saved = try await worker.update(updatedUser)
+            let saved = try await worker.update(u)
             self.user = saved
             await presenter.presentSave(.init(result: .success(saved)))
         } catch {

@@ -49,7 +49,7 @@ Domain/
 The full worked `UserList + UserDetail` feature lives in **`examples/redux-reswift/`** —
 a single `AppStore`, per-feature `State`/`Action`/`Reducer` triples, an async
 middleware bridging the repository to dispatched actions, and SwiftUI views
-subscribed to the store. `Domain` + `Data` follow `skills/REFERENCE_FEATURE.md` (vendored per example).
+subscribed to the store. `Domain` + `Data` follow `plugins/ios-architect/skills/REFERENCE_FEATURE.md` (vendored per example).
 
 > **Requires the `ReSwift` package**, wired in `examples/redux-reswift/Package.swift`.
 > It builds and tests as a standalone SPM package.
@@ -86,3 +86,18 @@ Key things to notice:
 - To TCA: largely mechanical — wrap actions in `@Reducer`, replace middleware with `Effect.run`, get `TestStore` + macros.
 - To MVVM: split store into per-feature `@Observable` models; lose replay/time-travel.
 - To Clean Architecture at Presentation: keep store; pull non-trivial business rules into Use Cases called from middleware.
+
+## Failure modes
+
+- Reducers run side effects.
+- Global state becomes a dumping ground for local screen state.
+- Views subscribe too broadly and rerender on unrelated changes.
+- Middleware dispatches UI updates off the main actor.
+
+## Review checklist
+
+- Are reducers pure and deterministic?
+- Are actions meaningful domain events, not UI widget names?
+- Are subscriptions scoped to the smallest useful state slice?
+- Does middleware handle errors and cancellation paths?
+- Are observers unsubscribed on lifecycle end?

@@ -16,8 +16,8 @@ public final class UserDetailPresenter: UserDetailPresentationLogic {
 
     public func presentLoad(_ response: UserDetail.Load.Response) async {
         switch response.result {
-        case .success(let user):
-            view?.displayLoad(.init(name: user.name, email: user.email, errorMessage: nil))
+        case .success(let u):
+            view?.displayLoad(.init(name: u.name, email: u.email, errorMessage: nil))
         case .failure(let box):
             view?.displayLoad(.init(name: "", email: "", errorMessage: box.message))
         }

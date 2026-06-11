@@ -23,10 +23,10 @@ public struct UserListView: View {
                 }
                 .buttonStyle(.plain)
                 .onAppear {
-                    let state = observer.state
-                    if state.hasMore, state.loading == .none,
-                       let idx = state.users.firstIndex(of: user),
-                       idx >= max(state.users.count - 3, 0) {
+                    let s = observer.state
+                    if s.hasMore, s.loading == .none,
+                       let idx = s.users.firstIndex(of: user),
+                       idx >= max(s.users.count - 3, 0) {
                         AppStore.shared.dispatch(AppAction.userList(.load(.nextPage)))
                     }
                 }

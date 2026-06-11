@@ -167,4 +167,5 @@ public extension UsersPage {
 - DI: every screen receives repository or use-cases via init; no globals/singletons.
 - Concurrency: `async`/`await`, UI on `@MainActor`.
 - Deployment target: iOS 17+ for every buildable example.
-- Tests: each skill ships at least 1 list-loading test + 1 detail-save test.
+- Tests: each buildable example ships focused XCTest coverage for its boundary
+  (list loading, detail save, routing, reducer/store transitions, or module rules).

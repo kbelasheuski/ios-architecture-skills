@@ -18,10 +18,10 @@ public final class FakeUserRepository: UserRepository, @unchecked Sendable {
     public func fetchUsers(page: Int) async throws -> UsersPage {
         if delay > .zero { try await Task.sleep(for: delay) }
         fetchPageCalls.append(page)
-        guard let pageResult = pages.first(where: { $0.page == page }) else {
+        guard let p = pages.first(where: { $0.page == page }) else {
             throw UserRepositoryError.notFound
         }
-        return pageResult
+        return p
     }
 
     public func fetchUser(id: User.ID) async throws -> User {
@@ -30,10 +30,10 @@ public final class FakeUserRepository: UserRepository, @unchecked Sendable {
             return try handler(id)
         }
         let all = pages.flatMap(\.users)
-        guard let user = all.first(where: { $0.id == id }) else {
+        guard let u = all.first(where: { $0.id == id }) else {
             throw UserRepositoryError.notFound
         }
-        return user
+        return u
     }
 
     public func update(_ user: User) async throws -> User {

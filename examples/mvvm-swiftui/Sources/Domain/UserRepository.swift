@@ -15,7 +15,7 @@ public enum UserRepositoryError: LocalizedError, Sendable, Equatable {
         switch self {
         case .network:        return "No internet connection"
         case .notFound:       return "User not found"
-        case .server(let code): return "Server error (\(code))"
+        case .server(let c):  return "Server error (\(c))"
         }
     }
 }

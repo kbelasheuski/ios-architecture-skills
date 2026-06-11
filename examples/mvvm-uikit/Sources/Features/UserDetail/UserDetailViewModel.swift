@@ -27,9 +27,9 @@ public final class UserDetailViewModel {
         Task { [weak self] in
             guard let self else { return }
             do {
-                let fetchedUser = try await repository.fetchUser(id: id)
-                user = fetchedUser
-                draftName = fetchedUser.name
+                let u = try await repository.fetchUser(id: id)
+                user = u
+                draftName = u.name
             } catch {
                 errorMessage = error.localizedDescription
             }
@@ -37,13 +37,13 @@ public final class UserDetailViewModel {
     }
 
     public func save() {
-        guard var updatedUser = user, canSave else { return }
-        updatedUser.name = draftName
+        guard var u = user, canSave else { return }
+        u.name = draftName
         isSaving = true
         Task { [weak self] in
             guard let self else { return }
             do {
-                let saved = try await repository.update(updatedUser)
+                let saved = try await repository.update(u)
                 user = saved
                 draftName = saved.name
                 didSave.send(saved)

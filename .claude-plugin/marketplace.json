@@ -1,6 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "ios-architecture-skills",
+  "version": "0.1.1",
   "description": "iOS architecture skills and agents for Claude Code.",
   "owner": {
     "name": "Kiryl Belasheuski",

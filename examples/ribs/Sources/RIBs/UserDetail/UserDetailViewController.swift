@@ -50,9 +50,9 @@ public final class UserDetailViewController:
     }
     public func setSaveEnabled(_ enabled: Bool) { saveButton.isEnabled = enabled }
     public func displayError(_ message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(.init(title: "OK", style: .default))
-        present(alert, animated: true)
+        let a = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        a.addAction(.init(title: "OK", style: .default))
+        present(a, animated: true)
     }
 
     @objc private func onSave() { listener?.save() }

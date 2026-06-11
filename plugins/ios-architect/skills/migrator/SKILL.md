@@ -1,6 +1,6 @@
 ---
 name: migrator
-description: Migrate an iOS codebase from one architecture pattern to another. Covers all 12×12 source→target pairs across MVC, MVP, MVVM-UIKit, MVVM-SwiftUI, MVVM-C, VIPER, Clean Swift, Clean Architecture, TCA, Redux/ReSwift, RIBs, and Modular/TMA. Produces a phased plan with shared primitives, per-pair playbook, and rollback triggers. Use when the user wants to migrate, port, or replace the architecture of an existing iOS project.
+description: Migrate an iOS codebase from one architecture pattern to another. Covers MVC, MVP, MVVM, MVVM-C, MVI, Reactive, Coordinator, VIPER, Clean Swift, Clean Architecture, TCA, Redux/ReSwift, RIBs, and Modular/TMA. Produces a phased plan with shared primitives, per-pair notes, and rollback triggers.
 ---
 
 # Migrator — Any-to-Any Architecture Migration
@@ -64,6 +64,15 @@ Single root composition (no service locator). For UIKit, instantiate in `SceneDe
 ### P12 — Delete Massive View Controller
 After P3, P4, P10, the original VC should have only `viewDidLoad`/`viewWillAppear` + glue. Delete inline business logic, target-actions for non-UI work, and any data-source code that belongs in a VM.
 
+### P13 — Introduce MVI Store
+Create a feature-local `State` value, `Intent` enum, and `dispatch(_:)` entry point. Move state transitions into the Store and keep views as renderers.
+
+### P14 — Isolate Reactive Pipeline
+Move Combine/Rx chains into a ViewModel, Presenter, or Interactor. Inject schedulers when timing matters. Convert failures into state and avoid nested subscriptions.
+
+### P15 — Extract Standalone Coordinator
+Move route state, deep-link parsing, and push/present calls into a Coordinator. For SwiftUI, use typed route values and `NavigationStack(path:)`; for UIKit, own the `UINavigationController` and child coordinator lifecycle.
+
 ## Per-pair migration matrix
 
 Rows = source, columns = target. Cell = ordered primitives + notes. `→` means "then". When the cell is `(identity)` no migration is required.
@@ -121,6 +130,9 @@ Rows = source, columns = target. Cell = ordered primitives + notes. `→` means 
 
 - **Dependency injection**: introduce a root container (P11) before scaling the new pattern across features.
 - **Navigation**: pick one of `Coordinator`, `NavigationStack+Router`, or `TCA Path` and apply it consistently across all migrated features.
+- **MVI**: use P13 when the target needs explicit state-machine transitions without TCA.
+- **Reactive**: use P14 only where streams beat plain async/await.
+- **Coordinator**: use P15 as an orthogonal navigation migration; pair it with the target presentation pattern.
 - **Test infra**: provide a `FakeUserRepository` (or equivalent) in a shared test-support module; do not re-implement per feature.
 - **Concurrency**: standardise on `async`/`await` + `@MainActor` annotations during migration; do not mix Combine, Rx, and async loosely.
 - **Module graph**: if migrating to Modular/TMA, define `Interface` targets up front and depend only on `Interface` from sibling modules to avoid cycles.
@@ -130,3 +142,19 @@ Rows = source, columns = target. Cell = ordered primitives + notes. `→` means 
 Once the per-pair plan is produced, suggest the user invoke:
 - `arch-<target>` for target conventions and corner cases.
 - `arch-<source>` for any residual cleanup of remaining source-pattern code.
+
+## Failure modes
+
+- Whole app is migrated in one branch.
+- Pilot feature is too central, risky, or dependency-heavy.
+- Existing behavior is rewritten before characterization tests exist.
+- Old and new patterns share unclear public APIs.
+- Rollback triggers are missing, so the migration cannot stop cleanly.
+
+## Review checklist
+
+- Has `analyser` confirmed the source pattern?
+- Is the target pattern justified against product/team constraints?
+- Is the first feature a leaf with a stable public boundary?
+- Are tests added before mechanical rewrites?
+- Does every phase have verification and rollback criteria?

@@ -33,9 +33,9 @@ public final class UserDetailViewModel {
     public func task() async {
         guard user == nil else { return }
         do {
-            let fetchedUser = try await fetchUserUseCase.execute(id: id)
-            user = fetchedUser
-            draftName = fetchedUser.name
+            let u = try await fetchUserUseCase.execute(id: id)
+            user = u
+            draftName = u.name
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -43,12 +43,12 @@ public final class UserDetailViewModel {
 
     @discardableResult
     public func save() async -> User? {
-        guard var updatedUser = user, canSave else { return nil }
-        updatedUser.name = draftName
+        guard var u = user, canSave else { return nil }
+        u.name = draftName
         isSaving = true
         defer { isSaving = false }
         do {
-            let saved = try await updateUserUseCase.execute(updatedUser)
+            let saved = try await updateUserUseCase.execute(u)
             user = saved
             draftName = saved.name
             onSaved(saved)

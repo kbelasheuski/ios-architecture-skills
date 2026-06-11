@@ -2,13 +2,13 @@ import Foundation
 import ReSwift
 
 public func appReducer(action: Action, state: AppState?) -> AppState {
-    var nextState = state ?? AppState()
-    guard let app = action as? AppAction else { return nextState }
+    var s = state ?? AppState()
+    guard let app = action as? AppAction else { return s }
     switch app {
-    case .userList(let listAction):
-        nextState.userList = userListReducer(action: listAction, state: nextState.userList)
-    case .userDetail(let detailAction):
-        nextState.userDetail = userDetailReducer(action: detailAction, state: nextState.userDetail)
+    case .userList(let a):
+        s.userList = userListReducer(action: a, state: s.userList)
+    case .userDetail(let a):
+        s.userDetail = userDetailReducer(action: a, state: s.userDetail)
     }
-    return nextState
+    return s
 }

@@ -36,7 +36,7 @@ Controllers/
 
 The worked `UserList + UserDetail` feature lives in **`examples/mvc/`** — diffable-data-source
 `UserListViewController`, a `UserDetailViewController` with save/dirty state, the `SceneDelegate`
-composition root, and the limited VC-level tests. `Domain` + `Data` follow `skills/REFERENCE_FEATURE.md` (vendored per example).
+composition root, and the limited VC-level tests. `Domain` + `Data` follow `plugins/ios-architect/skills/REFERENCE_FEATURE.md` (vendored per example).
 
 Key things to notice:
 
@@ -72,3 +72,18 @@ Key things to notice:
 - To MVVM-UIKit: extract `users`/`page`/load logic into `UserListViewModel` (Combine); VC binds to `@Published` outputs.
 - To MVVM-SwiftUI: same, then wrap VC in `UIHostingController` or rewrite VC as `View`.
 - To MVVM-C: extract navigation calls into a `Coordinator`.
+
+## Failure modes
+
+- View controller grows into the only place where state, networking, navigation, and formatting live.
+- Tests need to load UIKit views to verify basic business behavior.
+- Reuse becomes copy/paste because no presentation boundary exists.
+- Async tasks outlive the view controller or update stale UI.
+
+## Review checklist
+
+- Is MVC intentionally chosen for small scope, not by accident?
+- Are dependencies injected instead of fetched from singletons?
+- Are async tasks cancelled or guarded on view lifecycle changes?
+- Is navigation isolated enough to migrate later?
+- Is there a concrete migration path if this screen grows?

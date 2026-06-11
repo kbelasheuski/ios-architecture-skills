@@ -49,10 +49,10 @@ final class UserDetailViewController: UIViewController, UITextFieldDelegate {
         viewModel.$user
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] user in
-                self?.nameField.text = user.name
-                self?.emailLabel.text = user.email
-                self?.title = user.name
+            .sink { [weak self] u in
+                self?.nameField.text = u.name
+                self?.emailLabel.text = u.email
+                self?.title = u.name
                 self?.saveButton.isEnabled = self?.viewModel.canSave ?? false
             }
             .store(in: &cancellables)
@@ -69,9 +69,9 @@ final class UserDetailViewController: UIViewController, UITextFieldDelegate {
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] msg in
-                let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
-                alert.addAction(.init(title: "OK", style: .default))
-                self?.present(alert, animated: true)
+                let a = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
+                a.addAction(.init(title: "OK", style: .default))
+                self?.present(a, animated: true)
             }
             .store(in: &cancellables)
     }

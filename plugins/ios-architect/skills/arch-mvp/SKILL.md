@@ -39,7 +39,7 @@ Navigation/
 The full worked `UserList + UserDetail` feature lives in **`examples/mvp/`** —
 per-screen `Contracts` (View + Presenter protocols), `Presenter`, `ViewController`,
 a `UserNavigator` for routing, plus `Domain` + `Data` + test fakes that follow
-`skills/REFERENCE_FEATURE.md` (vendored per example). Key things to notice:
+`plugins/ios-architect/skills/REFERENCE_FEATURE.md` (vendored per example). Key things to notice:
 
 - **`UserList<X>Contracts.swift` defines both protocols** — the Presenter talks to the View only through its View protocol, which is what makes the Presenter testable without UIKit.
 - **The Presenter is the unit under test**; the ViewController is mocked via the View protocol.
@@ -68,3 +68,18 @@ a `UserNavigator` for routing, plus `Domain` + `Data` + test fakes that follow
 
 - To MVVM-UIKit: rename Presenter→ViewModel, replace View-protocol push with `@Published` outputs + Combine bindings.
 - To MVVM-SwiftUI: same, plus host via `UIHostingController` during transition.
+
+## Failure modes
+
+- Presenter starts retaining the view or UIKit objects.
+- View protocol becomes a mirror of UIKit instead of user-facing render commands.
+- Navigation leaks back into the ViewController.
+- Presenter and ViewController both hold the same mutable state.
+
+## Review checklist
+
+- Is the View passive and easy to mock?
+- Does the Presenter avoid UIKit imports?
+- Are async failures rendered through View protocol methods?
+- Is navigation delegated to a Navigator or Coordinator?
+- Do tests exercise Presenter behavior without launching UI?

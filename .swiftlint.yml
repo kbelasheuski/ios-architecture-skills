@@ -9,8 +9,8 @@ excluded:
 
 identifier_name:
   min_length:
-    warning: 3
-    error: 2
+    warning: 1
+    error: 1
   excluded:
     - id
     - ip

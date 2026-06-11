@@ -52,11 +52,11 @@ final class UserDetailViewController: UIViewController, UITextFieldDelegate {
         Task { [weak self] in
             guard let self else { return }
             do {
-                let fetchedUser = try await repository.fetchUser(id: userID)
-                user = fetchedUser
-                nameField.text = fetchedUser.name
-                emailLabel.text = fetchedUser.email
-                title = fetchedUser.name
+                let u = try await repository.fetchUser(id: userID)
+                user = u
+                nameField.text = u.name
+                emailLabel.text = u.email
+                title = u.name
                 updateSaveState()
             } catch {
                 presentError(error)
@@ -74,14 +74,14 @@ final class UserDetailViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc private func onSave() {
-        guard var updatedUser = user, let name = nameField.text else { return }
-        updatedUser.name = name
+        guard var u = user, let name = nameField.text else { return }
+        u.name = name
         isSaving = true
         Task { [weak self] in
             guard let self else { return }
             defer { isSaving = false }
             do {
-                _ = try await repository.update(updatedUser)
+                _ = try await repository.update(u)
                 navigationController?.popViewController(animated: true)
             } catch {
                 presentError(error)

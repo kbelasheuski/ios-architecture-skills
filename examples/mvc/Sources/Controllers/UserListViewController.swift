@@ -16,13 +16,15 @@ final class UserListViewController: UITableViewController {
 
     private lazy var dataSource: UITableViewDiffableDataSource<Section, User> = {
         UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, user in
-            let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.reuseID, for: indexPath)
-            guard let userCell = cell as? UserCell else {
-                assertionFailure("Expected UserCell for \(UserCell.reuseID)")
-                return cell
+            let reusableCell = tableView.dequeueReusableCell(
+                withIdentifier: UserCell.reuseID,
+                for: indexPath
+            )
+            guard let cell = reusableCell as? UserCell else {
+                return UITableViewCell()
             }
-            userCell.configure(with: user)
-            return userCell
+            cell.configure(with: user)
+            return cell
         }
     }()
 
