@@ -1,0 +1,39 @@
+{
+  "name": "ios-architect",
+  "version": "0.1.1",
+  "description": "Choose, audit, migrate, and implement iOS app architectures across UIKit and SwiftUI.",
+  "author": {
+    "name": "Kiryl Belasheuski",
+    "url": "https://github.com/kbelasheuski"
+  },
+  "homepage": "https://github.com/kbelasheuski/ios-architecture-skills",
+  "repository": "https://github.com/kbelasheuski/ios-architecture-skills",
+  "license": "MIT",
+  "keywords": [
+    "ios",
+    "architecture",
+    "swift",
+    "swiftui",
+    "uikit",
+    "mvvm",
+    "mvi",
+    "combine",
+    "coordinator"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "iOS Architect",
+    "shortDescription": "Choose, audit, migrate iOS app architectures (UIKit + SwiftUI).",
+    "longDescription": "A practical iOS architecture bundle with one router skill and reference playbooks for MVC, MVP, MVVM, MVVM-C, MVI, Reactive, Coordinator, VIPER, Clean Swift, Clean Architecture, TCA, Redux, RIBs, and Modular/TMA plus researcher/analyser/migrator workflows.",
+    "developerName": "Kiryl Belasheuski",
+    "category": "Engineering",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Act as iOS Architect. Inspect the codebase, route to the right reference playbook, recommend a production-grade architecture."
+    ],
+    "brandColor": "#0A84FF"
+  }
+}

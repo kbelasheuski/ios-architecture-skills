@@ -1,0 +1,29 @@
+included:
+  - examples
+
+# Keep the SwiftLint workflow scoped to examples, this config, and the workflow file.
+
+excluded:
+  - examples/**/.build
+  - examples/**/.swiftpm
+
+identifier_name:
+  min_length:
+    warning: 1
+    error: 1
+  excluded:
+    - id
+    - ip
+    - op
+    - tv
+    - vc
+    - vm
+    - ws
+
+nesting:
+  type_level:
+    warning: 3
+    error: 4
+  function_level:
+    warning: 2
+    error: 3

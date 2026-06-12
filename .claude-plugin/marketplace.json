@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ios-architecture-skills",
+  "version": "0.1.1",
+  "description": "iOS architecture skill package for Claude Code.",
+  "owner": {
+    "name": "Kiryl Belasheuski",
+    "url": "https://github.com/kbelasheuski"
+  },
+  "plugins": [
+    {
+      "name": "ios-architect",
+      "description": "Choose, audit, refactor, and migrate iOS app architectures across UIKit and SwiftUI.",
+      "source": "./plugin",
+      "category": "development",
+      "homepage": "https://github.com/kbelasheuski/ios-architecture-skills"
+    }
+  ]
+}

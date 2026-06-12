@@ -1,0 +1,10 @@
+.DS_Store
+.fuse_hidden*
+.planning/
+.build/
+.swiftpm/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+tooling/

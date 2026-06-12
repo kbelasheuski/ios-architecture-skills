@@ -1,0 +1,76 @@
+name: Examples
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "examples/**"
+      - ".github/workflows/examples.yml"
+  pull_request:
+    paths:
+      - "examples/**"
+      - ".github/workflows/examples.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: ${{ matrix.scheme }}
+    runs-on: macos-15
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - path: examples/mvc
+            scheme: MVCExample
+          - path: examples/mvp
+            scheme: MVPExample
+          - path: examples/mvvm-uikit
+            scheme: MVVMUIKitExample
+          - path: examples/mvvm-swiftui
+            scheme: MVVMSwiftUIExample
+          - path: examples/mvvm-swiftui-combine
+            scheme: MVVMSwiftUICombineExample
+          - path: examples/mvvm-c
+            scheme: MVVMCExample
+          - path: examples/mvi
+            scheme: MVIExample
+          - path: examples/coordinator
+            scheme: CoordinatorExample
+          - path: examples/viper
+            scheme: VIPERExample
+          - path: examples/clean-swift
+            scheme: CleanSwiftExample
+          - path: examples/clean-architecture
+            scheme: CleanArchitectureExample
+          - path: examples/modular-tma
+            scheme: ModularTMAExample
+          - path: examples/redux-reswift
+            scheme: ReduxReSwiftExample
+          - path: examples/tca
+            scheme: TCAExample
+            extra_args: -skipMacroValidation
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.3
+
+      - name: Test
+        working-directory: ${{ matrix.path }}
+        run: |
+          SIMULATOR_NAME="$(xcrun simctl list devices available | sed -n 's/.*\(iPhone [^(]*\) (.*/\1/p' | head -n 1)"
+          if [ -z "$SIMULATOR_NAME" ]; then
+            echo "No available iPhone simulator found"
+            xcrun simctl list devices available
+            exit 1
+          fi
+
+          xcodebuild test \
+            -scheme "${{ matrix.scheme }}" \
+            -destination "platform=iOS Simulator,name=${SIMULATOR_NAME}" \
+            ${{ matrix.extra_args }}

@@ -1,0 +1,97 @@
+name: Validate Skills
+
+on:
+  push:
+    paths:
+      - "plugin/**"
+      - ".agents/plugins/marketplace.json"
+      - ".claude-plugin/marketplace.json"
+      - ".planning/**"
+      - "tooling/**"
+      - ".github/workflows/validate-skills.yml"
+  pull_request:
+    paths:
+      - "plugin/**"
+      - ".agents/plugins/marketplace.json"
+      - ".claude-plugin/marketplace.json"
+      - ".planning/**"
+      - "tooling/**"
+      - ".github/workflows/validate-skills.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-skills-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate skill package
+    runs-on: macos-15
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.3
+
+      - name: Validate router skill structure
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          root = Path("plugin/skills/ios-architect")
+          skill = root / "SKILL.md"
+          refs = root / "references"
+
+          if not skill.exists():
+              raise SystemExit("Missing plugin/skills/ios-architect/SKILL.md")
+          if not refs.exists():
+              raise SystemExit("Missing plugin/skills/ios-architect/references")
+
+          required = [
+              "mvc",
+              "mvp",
+              "mvvm-uikit",
+              "mvvm-swiftui",
+              "mvvm-c",
+              "mvi",
+              "reactive",
+              "coordinator",
+              "viper",
+              "clean-swift",
+              "clean-architecture",
+              "tca",
+              "redux-reswift",
+              "ribs",
+              "modular-tma",
+          ]
+
+          text = skill.read_text(encoding="utf-8")
+          missing_refs = [slug for slug in required if not (refs / f"{slug}.md").exists()]
+          missing_routes = [slug for slug in required if f"`{slug}`" not in text]
+
+          if missing_refs:
+              raise SystemExit("Missing reference playbooks: " + ", ".join(missing_refs))
+          if missing_routes:
+              raise SystemExit("Missing router entries: " + ", ".join(missing_routes))
+          PY
+
+      - name: Validate architecture consistency
+        run: python3 tooling/scripts/validate/architecture.py
+
+      - name: Validate testing quality contract
+        run: python3 tooling/scripts/validate/testing-quality.py
+
+      - name: Validate benchmark coverage
+        run: python3 tooling/scripts/validate/benchmark-coverage.py
+
+      - name: Run benchmark assertions
+        run: python3 tooling/scripts/run/benchmarks.py
+
+      - name: Validate evidence lint
+        run: python3 tooling/scripts/validate/evidence-lint.py
+
+      - name: Validate markdown snippets
+        run: tooling/scripts/validate/testing-snippets.sh
