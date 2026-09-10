@@ -2,7 +2,7 @@
 
 `UserList` + `UserDetail` RIBs. Each RIB ships Builder, Component, Interactor, Router, ViewController.
 
-> **Requires:** `RIBs` + `RxSwift`. Bridge `async/await` → `Single` via `Single.fromAsync` helper at the bottom of `UserListInteractor.swift`.
+> **Pinned dependencies:** RIBs 1.1.0 + RxSwift 6.9.0. Bridge `async/await` → `Single` via `Single.fromAsync` helper at the bottom of `UserListInteractor.swift`.
 
 ## Layout
 
@@ -36,4 +36,4 @@ Tests/
 
 ## How testing works
 
-Interactor is the testable unit. Mock the `Presentable` protocol (record `display(rows:)`, `displayError(_:)`). Stub repository via `FakeUserRepository`. Activate the RIB with `sut.activate()`, wait for the Rx scheduler to drain, assert on mock state. Router tested separately with mock builder.
+Run `xcodebuild test -scheme RIBsExample -destination 'platform=iOS Simulator,name=iPhone 17 Pro'`. This tests the library; `Sources/App` is excluded. Interactor is the testable unit. Mock the `Presentable` protocol (record `display(rows:)`, `displayError(_:)`). Stub repository via `FakeUserRepository`. Activate the RIB with `sut.activate()`, wait for the Rx scheduler to drain, assert on mock state. The current tests cover interactor loading, selection, and save notification.

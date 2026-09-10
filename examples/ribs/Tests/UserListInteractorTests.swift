@@ -1,4 +1,6 @@
+@testable import RIBsExample
 import RIBs
+import RxSwift
 import XCTest
 
 final class UserListInteractorTests: XCTestCase {
@@ -15,7 +17,7 @@ final class UserListInteractorTests: XCTestCase {
         let exp = expectation(description: "rows displayed")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             XCTAssertEqual(presenter.displayedRows.first?.title, "Ada")
-            XCTAssertEqual(presenter.loadingHistory.last, .none)
+            XCTAssertEqual(presenter.loadingHistory.last, UserListLoading.none)
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1)
@@ -59,6 +61,8 @@ final class SpyListener: UserListListener {
 }
 
 final class SpyUserListRouter: UserListRouting {
+    private let lifecycleSubject = PublishSubject<RouterLifecycle>()
+    var lifecycle: Observable<RouterLifecycle> { lifecycleSubject.asObservable() }
     var interactable: Interactable {
         fatalError("not used in this test")
     }
@@ -68,7 +72,7 @@ final class SpyUserListRouter: UserListRouting {
     var children: [Routing] = []
     func attachChild(_ child: Routing) {}
     func detachChild(_ child: Routing) {}
-    func load() {}
+    func load() { lifecycleSubject.onNext(.didLoad) }
     private(set) var routedIDs: [User.ID] = []
     func routeToDetail(userID: User.ID) { routedIDs.append(userID) }
     func detachDetail() {}
