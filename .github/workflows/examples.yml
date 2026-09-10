@@ -50,6 +50,14 @@ jobs:
             scheme: CleanArchitectureExample
           - path: examples/modular-tma
             scheme: ModularTMAExample-Package
+          - path: examples/modular-tma
+            scheme: UsersApp
+            action: build
+            extra_args: -project Apps/ModularApps.xcodeproj
+          - path: examples/modular-tma
+            scheme: UserListDemo
+            action: build
+            extra_args: -project Apps/ModularApps.xcodeproj
           - path: examples/redux-reswift
             scheme: ReduxReSwiftExample
           - path: examples/tca
@@ -70,7 +78,7 @@ jobs:
             exit 1
           fi
 
-          xcodebuild test \
+          xcodebuild "${{ matrix.action || 'test' }}" \
             -scheme "${{ matrix.scheme }}" \
             -destination "platform=iOS Simulator,name=${SIMULATOR_NAME}" \
             ${{ matrix.extra_args }}
