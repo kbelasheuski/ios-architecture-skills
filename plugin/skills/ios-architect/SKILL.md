@@ -52,6 +52,7 @@ For the complete map, read `references/_index.md`.
 - Never recommend a pure MVC redesign for production apps — escalate to MVVM(@Observable) at minimum.
 - Default to `@Observable` (iOS 17+) for SwiftUI ViewModel state unless the user pins to an older deployment target.
 - Modularisation (SPM workspace or Tuist) is orthogonal to the in-module pattern. Recommend it for teams ≥ 5 or codebases ≥ 30 screens, regardless of in-module choice.
+- For implementation requests, implement through the requested scope using `references/migrator.md` and report screen coverage; for plan-only requests, inspect and return the plan without edits.
 
 ## Decision quick-table (use as a sanity check)
 
