@@ -1,5 +1,5 @@
 included:
-  - examples
+  - plugin/skills/ios-architect/assets/examples
 
 # Keep the SwiftLint workflow scoped to examples, this config, and the workflow file.
 
