@@ -33,7 +33,7 @@ For each model with persistence/network access, define a `protocol XRepository` 
 Lift presentation state out of a `UIViewController` into a `final class XViewModel` (Combine) or `@Observable final class XModel` (SwiftUI). No UIKit/SwiftUI imports in the VM.
 
 ### P4 — Introduce Coordinator
-Replace inline `navigationController.pushViewController` / `present` calls with calls on a `Coordinator` injected into the VC/VM. Coordinator owns the `UINavigationController`.
+Replace inline push/present calls with route events or narrow callbacks from the ViewModel. The Coordinator handles those events, assembles screens, and owns the `UINavigationController`; the ViewModel does not retain a concrete coordinator.
 
 ### P5 — Replace Coordinator with NavigationStack
 For SwiftUI targets, switch to `NavigationStack(path:)` with a typed `enum Route` and `navigationDestination(for:)`. Keep a thin `Router` if deep-linking is needed.
