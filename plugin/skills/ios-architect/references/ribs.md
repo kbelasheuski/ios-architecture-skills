@@ -1,10 +1,10 @@
 # RIBs (Uber)
 
 **Source references:**
-- uber/RIBs — https://github.com/uber/RIBs
-- iOS Tutorial 1 — https://github.com/uber/RIBs/wiki/iOS-Tutorial-1
-- iOS Tutorial 2 (composing RIBs) — https://github.com/uber/RIBs/wiki/iOS-Tutorial-2
-- TicTacToe sample sources — https://github.com/uber/RIBs/tree/main/ios/tutorials
+- uber/RIBs-iOS — https://github.com/uber/RIBs-iOS
+- iOS Tutorial 1 — https://github.com/uber/RIBs-iOS/wiki/iOS-Tutorial-1
+- iOS Tutorial 2 (composing RIBs) — https://github.com/uber/RIBs-iOS/wiki/iOS-Tutorial-2
+- TicTacToe sample sources — https://github.com/uber/RIBs-iOS/tree/main/tutorials
 
 Conventions match the TicTacToe tutorial: `Builder` constructs the RIB; `Buildable` is the protocol the parent depends on; `Component<Dep>` carries dependencies; `Router : ViewableRouter` (or `Router`); `Interactor : PresentableInteractor`. Listener interfaces flow events upward.
 
@@ -51,7 +51,7 @@ RIBs/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://github.com/uber/RIBs | RIBs requires router/interactor/component boundaries; the local example is reference-only, not proof of Uber-scale payoff. | `examples/ribs/` |
+| https://github.com/uber/RIBs-iOS | RIBs requires router/interactor/component boundaries; the local example is reference-only, not proof of Uber-scale payoff. | `examples/ribs/` |
 
 ## Reference implementation
 
@@ -59,9 +59,8 @@ The worked `Root → UserList → UserDetail` RIB tree lives in **`examples/ribs
 Builder/Component/Interactor/Router/ViewController per RIB, with the Root wiring
 UserList as its initial child. `Domain` + `Data` follow `skills/ios-architect/references/reference-feature.md` (vendored per example).
 
-> **Requires Uber's `RIBs` framework + `RxSwift`.** RIBs is not distributed via
-> SPM, so this example is readable reference code, not a standalone-buildable
-> package. Use it to study the tree wiring, not as a drop-in.
+> **Requires Uber's `RIBs` framework + `RxSwift`.** RIBs supports SwiftPM; this
+> local example remains reference-only until its own package and tests are verified.
 
 Key things to notice:
 
