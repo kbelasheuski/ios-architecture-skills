@@ -2,8 +2,8 @@
 
 **Source references:**
 - uber/RIBs-iOS — https://github.com/uber/RIBs-iOS
-- iOS Tutorial 1 — https://github.com/uber/RIBs-iOS/wiki/iOS-Tutorial-1
-- iOS Tutorial 2 (composing RIBs) — https://github.com/uber/RIBs-iOS/wiki/iOS-Tutorial-2
+- iOS Tutorial 1 — https://github.com/uber/RIBs-iOS/tree/main/tutorials/tutorial1
+- iOS Tutorial 2 (composing RIBs) — https://github.com/uber/RIBs-iOS/tree/main/tutorials/tutorial2
 - TicTacToe sample sources — https://github.com/uber/RIBs-iOS/tree/main/tutorials
 
 Conventions match the TicTacToe tutorial: `Builder` constructs the RIB; `Buildable` is the protocol the parent depends on; `Component<Dep>` carries dependencies; `Router : ViewableRouter` (or `Router`); `Interactor : PresentableInteractor`. Listener interfaces flow events upward.
