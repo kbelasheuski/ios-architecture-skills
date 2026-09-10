@@ -2,7 +2,7 @@
 
 Each feature is its own module with `Interface` (public API) + `Sources` (impl) + `Tests` + `Example` (mini-app per feature for fast iteration).
 
-> **Requires:** Tuist (or hand-rolled SPM workspace). Layout shown is canonical TMA. Templates in `Tuist/ProjectDescriptionHelpers/`.
+> **Requires:** Xcode with an iOS 17+ SDK. Open `Apps/ModularApps.xcodeproj`; `UsersApp` builds the composition root and `UserListDemo` runs the feature with local data. The main app requires a configured API endpoint. Tuist templates remain optional.
 
 ## Layout
 
@@ -47,4 +47,4 @@ Module dependency rule: **App depends only on `*Interface` targets**. `Sources` 
 
 ## How testing works
 
-Each module has its own `Tests/` target. Domain layer is pure Swift → fastest to test. Feature modules tested by injecting Use Case protocols + `FakeUserRepository`. Per-feature `Example` apps allow running the feature in isolation without launching the full app (also useful for snapshot tests).
+Run `xcodebuild test -scheme ModularTMAExample-Package -destination 'platform=iOS Simulator,name=iPhone 17 Pro'` for the package test target. Domain layer is pure Swift → fastest to test. Feature modules tested by injecting Use Case protocols + `FakeUserRepository`. Per-feature `Example` apps allow running the feature in isolation without launching the full app (also useful for snapshot tests).

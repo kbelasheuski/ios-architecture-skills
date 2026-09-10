@@ -1,4 +1,11 @@
 import SwiftUI
+import Domain
+import UserDomain
+import UserData
+import UserListFeatureInterface
+import UserListFeature
+import UserDetailFeatureInterface
+import UserDetailFeature
 
 @main
 struct UsersApp: App {

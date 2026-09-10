@@ -49,7 +49,7 @@ jobs:
           - path: examples/clean-architecture
             scheme: CleanArchitectureExample
           - path: examples/modular-tma
-            scheme: ModularTMAExample
+            scheme: ModularTMAExample-Package
           - path: examples/redux-reswift
             scheme: ReduxReSwiftExample
           - path: examples/tca
