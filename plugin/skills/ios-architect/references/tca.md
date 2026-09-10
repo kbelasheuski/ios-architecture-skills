@@ -50,7 +50,7 @@ Domain/
 
 The full worked `UserList + UserDetail` feature lives in **`assets/examples/tca/`** —
 `@Reducer` features with `@ObservableState`, a `UserClient` dependency, SwiftUI
-views bound to `Store`, and `TestStore` tests. The shared `Domain` follows `skills/ios-architect/references/reference-feature.md`; the example vendors its
+views bound to `Store`, and `TestStore` tests. The shared `Domain` follows `references/reference-feature.md`; the example vendors its
 own copy under `Sources/Domain`.
 
 > **Requires the `swift-composable-architecture` package** (pointfreeco), wired in

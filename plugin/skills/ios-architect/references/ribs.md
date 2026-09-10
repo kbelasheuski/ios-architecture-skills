@@ -57,7 +57,7 @@ RIBs/
 
 The worked `Root → UserList → UserDetail` RIB tree lives in **`assets/examples/ribs/`** —
 Builder/Component/Interactor/Router/ViewController per RIB, with the Root wiring
-UserList as its initial child. `Domain` + `Data` follow `skills/ios-architect/references/reference-feature.md` (vendored per example).
+UserList as its initial child. `Domain` + `Data` follow `references/reference-feature.md` (vendored per example).
 
 > **Requires Uber's `RIBs` framework + `RxSwift`.** RIBs is not distributed via
 > SPM, so this example is readable reference code, not a standalone-buildable

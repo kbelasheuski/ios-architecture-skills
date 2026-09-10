@@ -57,7 +57,7 @@ Domain/
 The full worked `UserList + UserDetail` feature lives in **`assets/examples/redux-reswift/`** —
 a single `AppStore`, per-feature `State`/`Action`/`Reducer` triples, an async
 middleware bridging the repository to dispatched actions, and SwiftUI views
-subscribed to the store. `Domain` + `Data` follow `skills/ios-architect/references/reference-feature.md` (vendored per example).
+subscribed to the store. `Domain` + `Data` follow `references/reference-feature.md` (vendored per example).
 
 > **Requires the `ReSwift` package**, wired in `assets/examples/redux-reswift/Package.swift`.
 > It builds and tests as a standalone SPM package.

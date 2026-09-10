@@ -46,7 +46,7 @@ Data/LiveUserRepository.swift
 The full worked `UserList + UserDetail` feature lives in
 **`assets/examples/mvvm-swiftui/`** — `@Observable @MainActor` models, SwiftUI Views,
 the app entry point, and model XCTest. `Domain` + `Data` + test fakes follow
-`skills/ios-architect/references/reference-feature.md` (vendored per example). Key things to
+`references/reference-feature.md` (vendored per example). Key things to
 notice:
 
 - **The model is `@Observable @MainActor`**, owned by the View via `@State` and injected into child views as a plain property — no `ObservableObject`/`@Published`.

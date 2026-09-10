@@ -44,7 +44,7 @@ Controllers/
 
 The worked `UserList + UserDetail` feature lives in **`assets/examples/mvc/`** — diffable-data-source
 `UserListViewController`, a `UserDetailViewController` with save/dirty state, the `SceneDelegate`
-composition root, and the limited VC-level tests. `Domain` + `Data` follow `skills/ios-architect/references/reference-feature.md` (vendored per example).
+composition root, and the limited VC-level tests. `Domain` + `Data` follow `references/reference-feature.md` (vendored per example).
 
 Key things to notice:
 

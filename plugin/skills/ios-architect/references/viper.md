@@ -46,7 +46,7 @@ Features/
 The full worked `UserList + UserDetail` feature lives in **`assets/examples/viper/`** —
 the seven files per module (Protocols, Entities, Interactor, Presenter,
 ViewController, Router, Builder), with `Domain` + `Data` + test fakes that follow
-`skills/ios-architect/references/reference-feature.md` (vendored per example). Key things to notice:
+`references/reference-feature.md` (vendored per example). Key things to notice:
 
 - **`UserList<X>Protocols.swift` is the contract hub** — View↔Presenter↔Interactor↔Router protocols in one file; everything else conforms to it.
 - **The Presenter is the unit under test** — it holds no UIKit; the ViewController is a thin `view` conforming to the View protocol and is mocked in tests.
