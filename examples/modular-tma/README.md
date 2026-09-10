@@ -8,7 +8,7 @@ Each feature is its own module with `Interface` (public API) + `Sources` (impl) 
 
 ```
 Sources/
-  App/UsersApp.swift                    // composition root, depends on *Interface only
+  App/UsersApp.swift                    // composition root, constructs implementation factories
   Modules/
     Core/                                // shared kernel
       (DesignSystem, Networking, etc.)
@@ -38,7 +38,7 @@ Tests/
   Support/
 ```
 
-Module dependency rule: **App depends only on `*Interface` targets**. `Sources` is opaque to siblings. Features depend on `UserDomain` + `Core/*`. `UserData` depends on `UserDomain`.
+Module dependency rule: **Sibling features depend only on `*Interface` targets**. The app composition root may construct implementation factories; `Sources` stays opaque to siblings. Features depend on `UserDomain` + `Core/*`. `UserData` depends on `UserDomain`.
 
 ## Real-world refs
 

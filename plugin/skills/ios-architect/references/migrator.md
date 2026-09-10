@@ -51,7 +51,7 @@ For each repository operation, define a `protocol XUseCase` with a single `execu
 Map VM properties → `State`, VM methods → `Action` cases, side-effects → `Effect`. Tests carry over by replacing async expectations with `TestStore` assertions.
 
 ### P10 — Split feature into Tuist/SPM module
-Create `Interface`, `Sources`, `Tests`, optionally `Example`. Move feature into `Sources`, expose its public entry via `Interface`. App target depends on `Interface` only.
+Create `Interface`, `Sources`, `Tests`, optionally `Example`. Move feature into `Sources`, expose its public entry via `Interface`. Sibling features depend on `Interface` only; the app composition root may construct implementation factories.
 
 ### P11 — Introduce dependency container
 Single root composition (no service locator). For UIKit, instantiate in `SceneDelegate`. For SwiftUI, build in `@main App` `init`. For TCA, use `@DependencyClient`.

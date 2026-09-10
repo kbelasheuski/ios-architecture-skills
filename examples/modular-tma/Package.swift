@@ -3,7 +3,7 @@ import PackageDescription
 
 // Real multi-target SwiftPM graph — the Interface/Sources boundary is enforced by the
 // compiler, not just folders. Each feature's implementation (Model/View) is internal to
-// its `<Feature>` target; siblings and the app may depend only on `<Feature>Interface`.
+// its `<Feature>` target; siblings depend only on `<Feature>Interface`; the app composition root constructs factories.
 // Verify on a Mac with:
 //
 //   xcodebuild test -scheme ModularTMAExample -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
