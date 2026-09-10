@@ -50,16 +50,16 @@ Domain/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://github.com/ReSwift/ReSwift | Global store subscription and reducer purity are the claims checked by the ReSwift example. | `examples/redux-reswift/` |
+| https://github.com/ReSwift/ReSwift | Global store subscription and reducer purity are the claims checked by the ReSwift example. | `assets/examples/redux-reswift/` |
 
 ## Reference implementation
 
-The full worked `UserList + UserDetail` feature lives in **`examples/redux-reswift/`** —
+The full worked `UserList + UserDetail` feature lives in **`assets/examples/redux-reswift/`** —
 a single `AppStore`, per-feature `State`/`Action`/`Reducer` triples, an async
 middleware bridging the repository to dispatched actions, and SwiftUI views
 subscribed to the store. `Domain` + `Data` follow `skills/ios-architect/references/reference-feature.md` (vendored per example).
 
-> **Requires the `ReSwift` package**, wired in `examples/redux-reswift/Package.swift`.
+> **Requires the `ReSwift` package**, wired in `assets/examples/redux-reswift/Package.swift`.
 > It builds and tests as a standalone SPM package.
 
 Key things to notice:

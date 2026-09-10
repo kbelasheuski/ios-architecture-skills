@@ -51,11 +51,11 @@ Sources/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://www.hackingwithswift.com/articles/71/how-to-use-the-coordinator-pattern-in-ios-apps | Coordinator-owned navigation is the boundary that keeps screen models free of push/present calls. | `examples/mvvm-c/` |
+| https://www.hackingwithswift.com/articles/71/how-to-use-the-coordinator-pattern-in-ios-apps | Coordinator-owned navigation is the boundary that keeps screen models free of push/present calls. | `assets/examples/mvvm-c/` |
 
 ## Reference implementation
 
-The full worked `UserList + UserDetail` feature lives in **`examples/mvvm-c/`**,
+The full worked `UserList + UserDetail` feature lives in **`assets/examples/mvvm-c/`**,
 implemented as the **SwiftUI Router variant** — an `@Observable @MainActor AppRouter`
 holding a `[Route]` path, MVVM models per feature, and `Domain` + `Data` that follow
 `skills/ios-architect/references/reference-feature.md` (vendored per example). Key things to notice:

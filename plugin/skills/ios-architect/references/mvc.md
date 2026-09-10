@@ -38,11 +38,11 @@ Controllers/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://developer.apple.com/library/archive/documentation/General/Conceptual/CocoaEncyclopedia/Model-View-Controller/Model-View-Controller.html | MVC role split is the baseline claim to verify before accepting controller-owned presentation logic. | `examples/mvc/` |
+| https://developer.apple.com/library/archive/documentation/General/Conceptual/CocoaEncyclopedia/Model-View-Controller/Model-View-Controller.html | MVC role split is the baseline claim to verify before accepting controller-owned presentation logic. | `assets/examples/mvc/` |
 
 ## Reference implementation
 
-The worked `UserList + UserDetail` feature lives in **`examples/mvc/`** — diffable-data-source
+The worked `UserList + UserDetail` feature lives in **`assets/examples/mvc/`** — diffable-data-source
 `UserListViewController`, a `UserDetailViewController` with save/dirty state, the `SceneDelegate`
 composition root, and the limited VC-level tests. `Domain` + `Data` follow `skills/ios-architect/references/reference-feature.md` (vendored per example).
 

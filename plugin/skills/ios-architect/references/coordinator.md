@@ -38,7 +38,7 @@ Navigation/
   UserFlowCoordinator.swift
 ```
 
-The buildable SwiftUI reference is `examples/coordinator/`.
+The buildable SwiftUI reference is `assets/examples/coordinator/`.
 
 ## Rules
 
@@ -83,7 +83,7 @@ The buildable SwiftUI reference is `examples/coordinator/`.
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://developer.apple.com/documentation/swiftui/navigationstack | Typed route state is the source of truth for SwiftUI navigation and deep-link replay. | `examples/coordinator/` |
+| https://developer.apple.com/documentation/swiftui/navigationstack | Typed route state is the source of truth for SwiftUI navigation and deep-link replay. | `assets/examples/coordinator/` |
 
 ## Reference implementation notes
 

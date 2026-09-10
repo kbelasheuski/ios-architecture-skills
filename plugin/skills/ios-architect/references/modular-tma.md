@@ -87,11 +87,11 @@ Module dependency rule: **App depends on Features' `Interface` only**; `Sources`
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://docs.tuist.dev/en/guides/develop/projects/tma-architecture | TMA claims must be tied to Interface/Sources boundaries and graph checks, not folder names alone. | `examples/modular-tma/` |
+| https://docs.tuist.dev/en/guides/develop/projects/tma-architecture | TMA claims must be tied to Interface/Sources boundaries and graph checks, not folder names alone. | `assets/examples/modular-tma/` |
 
 ## Reference implementation
 
-The worked modular layout lives in **`examples/modular-tma/`** — `UserDomain` /
+The worked modular layout lives in **`assets/examples/modular-tma/`** — `UserDomain` /
 `UserData` modules, `UserListFeature` / `UserDetailFeature` each split into an
 `Interface` target + opaque `Sources` + a per-feature `Example` app, plus the Tuist
 `Project+Templates.swift` helper and the App composition root.
@@ -99,7 +99,7 @@ The worked modular layout lives in **`examples/modular-tma/`** — `UserDomain` 
 > **This is a build-graph layer, not a UI pattern** — it composes *with* MVVM / TCA /
 > Clean inside each feature's `Sources`. The example uses MVVM-SwiftUI per feature.
 > The Tuist variant requires **Tuist** installed; the SPM-only variant below needs no
-> extra tooling. `examples/modular-tma/Package.swift` is a real multi-target SPM graph
+> extra tooling. `assets/examples/modular-tma/Package.swift` is a real multi-target SPM graph
 > (`Domain`, `UserDomain`, `UserData`, and per-feature `Interface` + `Sources` targets):
 > each feature's `Model`/`View` is internal to its `Sources` target, so the
 > `Interface`/`Sources` boundary is enforced by the compiler, not just folders.

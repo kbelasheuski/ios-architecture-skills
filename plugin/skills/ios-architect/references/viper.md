@@ -39,11 +39,11 @@ Features/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://www.objc.io/issues/13-architecture/viper/ | VIPER's view/interactor/presenter/router split is only useful when the module boundary is worth the file overhead. | `examples/viper/` |
+| https://www.objc.io/issues/13-architecture/viper/ | VIPER's view/interactor/presenter/router split is only useful when the module boundary is worth the file overhead. | `assets/examples/viper/` |
 
 ## Reference implementation
 
-The full worked `UserList + UserDetail` feature lives in **`examples/viper/`** —
+The full worked `UserList + UserDetail` feature lives in **`assets/examples/viper/`** —
 the seven files per module (Protocols, Entities, Interactor, Presenter,
 ViewController, Router, Builder), with `Domain` + `Data` + test fakes that follow
 `skills/ios-architect/references/reference-feature.md` (vendored per example). Key things to notice:

@@ -30,7 +30,7 @@ Data/
   LiveUserRepository.swift
 ```
 
-The buildable reference is `examples/mvi/`.
+The buildable reference is `assets/examples/mvi/`.
 
 ## Rules
 
@@ -68,14 +68,14 @@ The buildable reference is `examples/mvi/`.
 
 - Redux, *Three Principles* — https://redux.js.org/understanding/thinking-in-redux/three-principles
 - Model-View-Intent in iOS is a local state-machine pattern, not a single Apple-prescribed framework.
-- Use this repo's `examples/mvi/` as the canonical convention for `State`, `Intent`, and Store ownership.
+- Use this repo's `assets/examples/mvi/` as the canonical convention for `State`, `Intent`, and Store ownership.
 
 ## Source-backed proof
 
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://redux.js.org/understanding/thinking-in-redux/three-principles | Single source of truth and explicit actions justify the local Store/Intent/State loop. | `examples/mvi/` |
+| https://redux.js.org/understanding/thinking-in-redux/three-principles | Single source of truth and explicit actions justify the local Store/Intent/State loop. | `assets/examples/mvi/` |
 
 ## Reference implementation notes
 

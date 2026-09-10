@@ -33,7 +33,7 @@ Domain/  Data/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://developer.apple.com/documentation/combine | Combine publisher/subscriber state flow is the binding seam used by the UIKit ViewModel example. | `examples/mvvm-uikit/` |
+| https://developer.apple.com/documentation/combine | Combine publisher/subscriber state flow is the binding seam used by the UIKit ViewModel example. | `assets/examples/mvvm-uikit/` |
 
 ## Reference implementation — full feature
 
