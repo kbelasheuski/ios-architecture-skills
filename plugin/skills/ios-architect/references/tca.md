@@ -3,7 +3,7 @@
 **Source references (study after reading this skill):**
 - pointfreeco/swift-composable-architecture — https://github.com/pointfreeco/swift-composable-architecture
 - CaseStudies — https://github.com/pointfreeco/swift-composable-architecture/tree/main/Examples/CaseStudies
-- Tutorials — https://pointfreeco.github.io/swift-composable-architecture/main/tutorials/composablearchitecture
+- Tutorials — https://swiftpackageindex.com/pointfreeco/swift-composable-architecture/~/documentation/composablearchitecture
 - TCA perf trade-offs (Karin Prater) — https://www.swiftyplace.com/blog/the-composable-architecture-performance
 
 Code in this skill follows the canonical CaseStudies conventions: `@Reducer`, `@ObservableState`, `Reduce { state, action in switch action }`, `.ifLet`, `StackState`, `@DependencyClient`.
