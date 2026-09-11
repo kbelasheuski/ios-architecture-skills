@@ -67,7 +67,7 @@ Key things to notice:
 - **One global `AppState`**, composed from feature sub-states; the store is the single source of truth and views read slices of it.
 - **Reducers are pure `(State, Action) -> State`** — no async, no side effects; this is why they are the easiest tests in the whole bundle.
 - **Side effects live in middleware** — `AsyncMiddleware` calls the repository and dispatches success/failure actions back into the store.
-- **Views dispatch actions, never mutate state directly**; navigation is itself modeled as state in the store.
+- **Views dispatch actions, never mutate store state directly**; selection callbacks update the app-owned `NavigationStack` path.
 
 
 ## Testing strategy
@@ -102,7 +102,7 @@ Key things to notice:
 ## Corner cases
 
 - `@MainActor` on store dispatches when updating UI; `MainActor.run { ... }` from middleware Task.
-- Do not encode navigation in `AppState`; let Coordinator/Router observe and react.
+- Keep the navigation path in the app view, as in the example; feature state remains in `AppState`.
 - All state types must be `Equatable` for change detection.
 - Pair `subscribe`/`unsubscribe` on view appear/disappear; missing unsubscribe leaks observers.
 - Middleware order matters; logging middleware sits in front of async.
