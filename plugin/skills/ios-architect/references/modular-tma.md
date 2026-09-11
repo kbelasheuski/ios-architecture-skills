@@ -80,7 +80,7 @@ Projects/
       Project.swift
 ```
 
-Module dependency rule: **App depends on Features' `Interface` only**; `Sources` opaque. Features depend on `UserDomain` + `Core/Networking/Interface` + `Core/DesignSystem`. `UserData` depends on `UserDomain` + `Core/Networking/Interface`. `TestSupport` depends on `UserDomain` (it lives in Sources, not behind an Interface — test targets only).
+Module dependency rule: **Sibling features depend on each other's `Interface` only**; the app composition root may construct implementation factories. Features depend on `UserDomain` + `Core/Networking/Interface` + `Core/DesignSystem`. `UserData` depends on `UserDomain` + `Core/Networking/Interface`. `TestSupport` depends on `UserDomain` (it lives in Sources, not behind an Interface — test targets only).
 
 ## Source-backed proof
 

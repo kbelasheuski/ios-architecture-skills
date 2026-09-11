@@ -161,7 +161,7 @@ Hand off to: migrator  (with from=<current>, to=<target>)
 - `WithViewStore` everywhere in TCA 1.7+ codebase (legacy, should be `@ObservableState`).
 - `NavigationStack` paths held in 5 different `@State` properties across one feature.
 - VIPER modules where Presenter calls Interactor synchronously and blocks main thread.
-- Repository protocols in same module as their concrete impl (defeats Clean's dependency-inversion).
+- Repository protocols in the same module as their concrete implementation do not enforce the Domain/Data dependency boundary at module level.
 
 ## Hand-off
 
