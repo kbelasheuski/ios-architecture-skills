@@ -26,7 +26,7 @@ Code follows the kudoleh template's split:
 
 ## Folder structure
 
-Matches the worked example in `examples/clean-architecture/`:
+Matches the worked example in `assets/examples/clean-architecture/`:
 
 ```
 Sources/
@@ -59,12 +59,12 @@ Tests/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html | Dependency rule and use-case isolation are the claims proven by the Domain/Data/Presentation example. | `examples/clean-architecture/` |
+| https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html | Dependency rule and use-case isolation are the claims proven by the Domain/Data/Presentation example. | `assets/examples/clean-architecture/` |
 
 ## Reference implementation
 
 The full worked `UserList + UserDetail` feature lives in
-**`examples/clean-architecture/`** — Domain entities + Use Cases, Data repository,
+**`assets/examples/clean-architecture/`** — Domain entities + Use Cases, Data repository,
 `@Observable` ViewModels, SwiftUI Views, the `UsersFlowCoordinator`, the
 `AppDIContainer` / `UsersSceneDIContainer` composition root, and Domain + ViewModel
 XCTest. Read it there rather than reproducing it here; key things to notice when you do:

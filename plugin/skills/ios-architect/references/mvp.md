@@ -40,14 +40,14 @@ Navigation/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://martinfowler.com/eaaDev/PassiveScreen.html | Passive View supports presenter-owned decisions with a view protocol as the seam. | `examples/mvp/` |
+| https://martinfowler.com/eaaDev/PassiveScreen.html | Passive View supports presenter-owned decisions with a view protocol as the seam. | `assets/examples/mvp/` |
 
 ## Reference implementation
 
-The full worked `UserList + UserDetail` feature lives in **`examples/mvp/`** —
+The full worked `UserList + UserDetail` feature lives in **`assets/examples/mvp/`** —
 per-screen `Contracts` (View + Presenter protocols), `Presenter`, `ViewController`,
 a `UserNavigator` for routing, plus `Domain` + `Data` + test fakes that follow
-`skills/ios-architect/references/reference-feature.md` (vendored per example). Key things to notice:
+`references/reference-feature.md` (vendored per example). Key things to notice:
 
 - **`UserList<X>Contracts.swift` defines both protocols** — the Presenter talks to the View only through its View protocol, which is what makes the Presenter testable without UIKit.
 - **The Presenter is the unit under test**; the ViewController is mocked via the View protocol.

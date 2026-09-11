@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - "examples/**"
+      - "plugin/skills/ios-architect/assets/examples/**"
       - ".swiftlint.yml"
       - ".github/workflows/swiftlint.yml"
   pull_request:
     paths:
-      - "examples/**"
+      - "plugin/skills/ios-architect/assets/examples/**"
       - ".swiftlint.yml"
       - ".github/workflows/swiftlint.yml"
 

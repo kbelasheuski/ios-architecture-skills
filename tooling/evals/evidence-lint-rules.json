@@ -5,77 +5,77 @@
     {
       "slug": "mvc",
       "path": "plugin/skills/ios-architect/references/mvc.md",
-      "local_example": "examples/mvc/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/mvc/"
     },
     {
       "slug": "mvp",
       "path": "plugin/skills/ios-architect/references/mvp.md",
-      "local_example": "examples/mvp/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/mvp/"
     },
     {
       "slug": "mvvm-uikit",
       "path": "plugin/skills/ios-architect/references/mvvm-uikit.md",
-      "local_example": "examples/mvvm-uikit/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/mvvm-uikit/"
     },
     {
       "slug": "mvvm-swiftui",
       "path": "plugin/skills/ios-architect/references/mvvm-swiftui.md",
-      "local_example": "examples/mvvm-swiftui/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/mvvm-swiftui/"
     },
     {
       "slug": "mvvm-c",
       "path": "plugin/skills/ios-architect/references/mvvm-c.md",
-      "local_example": "examples/mvvm-c/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/mvvm-c/"
     },
     {
       "slug": "mvi",
       "path": "plugin/skills/ios-architect/references/mvi.md",
-      "local_example": "examples/mvi/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/mvi/"
     },
     {
       "slug": "reactive",
       "path": "plugin/skills/ios-architect/references/reactive.md",
-      "local_example": "examples/mvvm-swiftui-combine/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/mvvm-swiftui-combine/"
     },
     {
       "slug": "coordinator",
       "path": "plugin/skills/ios-architect/references/coordinator.md",
-      "local_example": "examples/coordinator/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/coordinator/"
     },
     {
       "slug": "viper",
       "path": "plugin/skills/ios-architect/references/viper.md",
-      "local_example": "examples/viper/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/viper/"
     },
     {
       "slug": "clean-swift",
       "path": "plugin/skills/ios-architect/references/clean-swift.md",
-      "local_example": "examples/clean-swift/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/clean-swift/"
     },
     {
       "slug": "clean-architecture",
       "path": "plugin/skills/ios-architect/references/clean-architecture.md",
-      "local_example": "examples/clean-architecture/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/clean-architecture/"
     },
     {
       "slug": "tca",
       "path": "plugin/skills/ios-architect/references/tca.md",
-      "local_example": "examples/tca/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/tca/"
     },
     {
       "slug": "redux-reswift",
       "path": "plugin/skills/ios-architect/references/redux-reswift.md",
-      "local_example": "examples/redux-reswift/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/redux-reswift/"
     },
     {
       "slug": "ribs",
       "path": "plugin/skills/ios-architect/references/ribs.md",
-      "local_example": "examples/ribs/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/ribs/"
     },
     {
       "slug": "modular-tma",
       "path": "plugin/skills/ios-architect/references/modular-tma.md",
-      "local_example": "examples/modular-tma/"
+      "local_example": "plugin/skills/ios-architect/assets/examples/modular-tma/"
     }
   ],
   "support_docs": [

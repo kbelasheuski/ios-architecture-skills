@@ -6,11 +6,11 @@ on:
     branches:
       - main
     paths:
-      - "examples/**"
+      - "plugin/skills/ios-architect/assets/examples/**"
       - ".github/workflows/examples.yml"
   pull_request:
     paths:
-      - "examples/**"
+      - "plugin/skills/ios-architect/assets/examples/**"
       - ".github/workflows/examples.yml"
 
 concurrency:
@@ -26,43 +26,43 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - path: examples/mvc
+          - path: plugin/skills/ios-architect/assets/examples/mvc
             scheme: MVCExample
-          - path: examples/mvp
+          - path: plugin/skills/ios-architect/assets/examples/mvp
             scheme: MVPExample
-          - path: examples/mvvm-uikit
+          - path: plugin/skills/ios-architect/assets/examples/mvvm-uikit
             scheme: MVVMUIKitExample
-          - path: examples/mvvm-swiftui
+          - path: plugin/skills/ios-architect/assets/examples/mvvm-swiftui
             scheme: MVVMSwiftUIExample
-          - path: examples/mvvm-swiftui-combine
+          - path: plugin/skills/ios-architect/assets/examples/mvvm-swiftui-combine
             scheme: MVVMSwiftUICombineExample
-          - path: examples/mvvm-c
+          - path: plugin/skills/ios-architect/assets/examples/mvvm-c
             scheme: MVVMCExample
-          - path: examples/mvi
+          - path: plugin/skills/ios-architect/assets/examples/mvi
             scheme: MVIExample
-          - path: examples/coordinator
+          - path: plugin/skills/ios-architect/assets/examples/coordinator
             scheme: CoordinatorExample
-          - path: examples/viper
+          - path: plugin/skills/ios-architect/assets/examples/viper
             scheme: VIPERExample
-          - path: examples/clean-swift
+          - path: plugin/skills/ios-architect/assets/examples/clean-swift
             scheme: CleanSwiftExample
-          - path: examples/clean-architecture
+          - path: plugin/skills/ios-architect/assets/examples/clean-architecture
             scheme: CleanArchitectureExample
-          - path: examples/modular-tma
+          - path: plugin/skills/ios-architect/assets/examples/modular-tma
             scheme: ModularTMAExample-Package
-          - path: examples/modular-tma
+          - path: plugin/skills/ios-architect/assets/examples/modular-tma
             scheme: UsersApp
             action: build
             extra_args: -project Apps/ModularApps.xcodeproj
-          - path: examples/modular-tma
+          - path: plugin/skills/ios-architect/assets/examples/modular-tma
             scheme: UserListDemo
             action: build
             extra_args: -project Apps/ModularApps.xcodeproj
-          - path: examples/redux-reswift
+          - path: plugin/skills/ios-architect/assets/examples/redux-reswift
             scheme: ReduxReSwiftExample
-          - path: examples/ribs
+          - path: plugin/skills/ios-architect/assets/examples/ribs
             scheme: RIBsExample
-          - path: examples/tca
+          - path: plugin/skills/ios-architect/assets/examples/tca
             scheme: TCAExample
             extra_args: -skipMacroValidation
 

@@ -1,11 +1,11 @@
 included:
-  - examples
+  - plugin/skills/ios-architect/assets/examples
 
 # Keep the SwiftLint workflow scoped to examples, this config, and the workflow file.
 
 excluded:
-  - examples/**/.build
-  - examples/**/.swiftpm
+  - plugin/skills/ios-architect/assets/examples/**/.build
+  - plugin/skills/ios-architect/assets/examples/**/.swiftpm
 
 identifier_name:
   min_length:

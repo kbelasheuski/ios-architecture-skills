@@ -58,7 +58,7 @@ def proof_path(value: str) -> str | None:
     backtick = re.search(r"`([^`]+)`", value)
     if backtick:
         return backtick.group(1)
-    plain = re.search(r"(examples/[A-Za-z0-9._/-]+)", value)
+    plain = re.search(r"(assets/examples/[A-Za-z0-9._/-]+)", value)
     return plain.group(1) if plain else None
 
 
@@ -103,7 +103,7 @@ def validate_playbook(entry: dict[str, str], check_urls: bool) -> int:
         local = proof_path(row["Local proof"])
         if not local:
             fail(f"{rel}: source proof row lacks local proof path: {row}")
-        if not (ROOT / local).exists():
+        if not (ROOT / "plugin" / "skills" / "ios-architect" / local).exists():
             fail(f"{rel}: local proof path does not exist: {local}")
         if len(row["Claim checked"]) < 30:
             fail(f"{rel}: source proof claim is too thin: {row['Claim checked']}")

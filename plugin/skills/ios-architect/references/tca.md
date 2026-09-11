@@ -44,17 +44,17 @@ Domain/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://github.com/pointfreeco/swift-composable-architecture | Reducer, dependency, and TestStore seams are the core claims checked by the TCA example. | `examples/tca/` |
+| https://github.com/pointfreeco/swift-composable-architecture | Reducer, dependency, and TestStore seams are the core claims checked by the TCA example. | `assets/examples/tca/` |
 
 ## Reference implementation
 
-The full worked `UserList + UserDetail` feature lives in **`examples/tca/`** —
+The full worked `UserList + UserDetail` feature lives in **`assets/examples/tca/`** —
 `@Reducer` features with `@ObservableState`, a `UserClient` dependency, SwiftUI
-views bound to `Store`, and `TestStore` tests. The shared `Domain` follows `skills/ios-architect/references/reference-feature.md`; the example vendors its
+views bound to `Store`, and `TestStore` tests. The shared `Domain` follows `references/reference-feature.md`; the example vendors its
 own copy under `Sources/Domain`.
 
 > **Requires the `swift-composable-architecture` package** (pointfreeco), wired in
-> `examples/tca/Package.swift`. It builds and tests as a standalone SPM package —
+> `assets/examples/tca/Package.swift`. It builds and tests as a standalone SPM package —
 > TCA uses macros, so pass `-skipMacroValidation` to `xcodebuild` in CLI/CI.
 
 Key things to notice:

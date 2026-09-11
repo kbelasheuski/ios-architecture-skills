@@ -39,14 +39,14 @@ Data/LiveUserRepository.swift
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://developer.apple.com/documentation/swiftui/migrating-from-the-observable-object-protocol-to-the-observable-macro | Observation is the iOS 17 state model used by the SwiftUI screen model example. | `examples/mvvm-swiftui/` |
+| https://developer.apple.com/documentation/swiftui/migrating-from-the-observable-object-protocol-to-the-observable-macro | Observation is the iOS 17 state model used by the SwiftUI screen model example. | `assets/examples/mvvm-swiftui/` |
 
 ## Reference implementation
 
 The full worked `UserList + UserDetail` feature lives in
-**`examples/mvvm-swiftui/`** — `@Observable @MainActor` models, SwiftUI Views,
+**`assets/examples/mvvm-swiftui/`** — `@Observable @MainActor` models, SwiftUI Views,
 the app entry point, and model XCTest. `Domain` + `Data` + test fakes follow
-`skills/ios-architect/references/reference-feature.md` (vendored per example). Key things to
+`references/reference-feature.md` (vendored per example). Key things to
 notice:
 
 - **The model is `@Observable @MainActor`**, owned by the View via `@State` and injected into child views as a plain property — no `ObservableObject`/`@Published`.
@@ -56,7 +56,7 @@ notice:
 
 ## Combine variant
 
-Use `examples/mvvm-swiftui-combine/` when the project already standardises on
+Use `assets/examples/mvvm-swiftui-combine/` when the project already standardises on
 `ObservableObject`, `@Published`, or Combine bindings. Keep the same boundaries:
 the View owns the model with `@StateObject`, the model stays `@MainActor`, and
 repositories are injected through init. If the feature is mainly a stream pipeline

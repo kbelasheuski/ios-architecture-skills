@@ -33,7 +33,7 @@ Features/Search/
 Domain/SearchService.swift
 ```
 
-For a simple SwiftUI + Combine baseline, see `examples/mvvm-swiftui-combine/`.
+For a simple SwiftUI + Combine baseline, see `assets/examples/mvvm-swiftui-combine/`.
 
 ## Rules
 
@@ -79,7 +79,7 @@ For a simple SwiftUI + Combine baseline, see `examples/mvvm-swiftui-combine/`.
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://developer.apple.com/documentation/combine | Combine pipelines are used only where stream replacement, cancellation, and scheduling are first-class behavior. | `examples/mvvm-swiftui-combine/` |
+| https://developer.apple.com/documentation/combine | Combine pipelines are used only where stream replacement, cancellation, and scheduling are first-class behavior. | `assets/examples/mvvm-swiftui-combine/` |
 
 ## Reference implementation notes
 

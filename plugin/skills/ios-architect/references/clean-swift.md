@@ -37,7 +37,7 @@ Scenes/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://clean-swift.com/ | The VIP request/response/view-model cycle is the reason this example separates interactor, presenter, worker, and models. | `examples/clean-swift/` |
+| https://clean-swift.com/ | The VIP request/response/view-model cycle is the reason this example separates interactor, presenter, worker, and models. | `assets/examples/clean-swift/` |
 
 ## Reference implementation — full feature
 
