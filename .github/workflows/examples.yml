@@ -52,6 +52,8 @@ jobs:
             scheme: ModularTMAExample
           - path: examples/redux-reswift
             scheme: ReduxReSwiftExample
+          - path: examples/ribs
+            scheme: RIBsExample
           - path: examples/tca
             scheme: TCAExample
             extra_args: -skipMacroValidation
