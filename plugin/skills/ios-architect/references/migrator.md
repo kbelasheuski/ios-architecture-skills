@@ -55,10 +55,10 @@ Replace inline push/present calls with route events or narrow callbacks from the
 ### P5 — Replace Coordinator with NavigationStack
 For SwiftUI targets, switch to `NavigationStack(path:)` with a typed `enum Route` and `navigationDestination(for:)`. Keep a thin `Router` if deep-linking is needed.
 
-### P6 — Wrap UIKit screen in UIHostingController
+### P6 — Host a SwiftUI screen in UIKit with UIHostingController
 For UIKit-host migration to SwiftUI, write the new SwiftUI view and host it via `UIHostingController`. Old VC's parent Coordinator continues to push it.
 
-### P7 — Wrap SwiftUI screen in UIViewControllerRepresentable
+### P7 — Embed a UIKit controller in SwiftUI with UIViewControllerRepresentable
 Reverse direction when SwiftUI host needs to embed legacy UIKit screens.
 
 ### P8 — Introduce Use Cases (Domain layer)

@@ -102,7 +102,7 @@ Key things to notice:
 ## Migration hand-off
 
 - To MVVM-UIKit: extract `users`/`page`/load logic into `UserListViewModel` (Combine); VC binds to `@Published` outputs.
-- To MVVM-SwiftUI: same, then wrap VC in `UIHostingController` or rewrite VC as `View`.
+- To MVVM-SwiftUI: same, then rewrite the VC as a SwiftUI `View` hosted in `UIHostingController`; embed a retained UIKit VC in SwiftUI with `UIViewControllerRepresentable`.
 - To MVVM-C: extract navigation calls into a `Coordinator`.
 
 ## Failure modes
