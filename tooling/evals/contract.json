@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "purpose": "Deterministic quality checks for ios-architect reference playbooks.",
+  "defaults": {
+    "testing_section_heading_regex": "^##\\s+Testing strategy\\s*$",
+    "required_any_groups": [
+      {
+        "label": "observable behavior under test",
+        "patterns": [
+          "\\bstate\\b",
+          "\\bsuccess\\b",
+          "\\bloading\\b",
+          "\\bloaded\\b",
+          "\\broute\\b",
+          "\\bpresenter\\b",
+          "\\binteractor\\b",
+          "\\breducer\\b",
+          "\\bstore\\b"
+        ]
+      },
+      {
+        "label": "failure or error path",
+        "patterns": [
+          "\\bfailure\\b",
+          "\\berror\\b",
+          "\\bretry\\b",
+          "\\brejected\\b",
+          "\\bfailed\\b"
+        ]
+      },
+      {
+        "label": "test double or dependency boundary",
+        "patterns": [
+          "\\bfake\\b",
+          "\\bmock\\b",
+          "\\bspy\\b",
+          "\\bspies\\b",
+          "\\brepository\\b",
+          "\\bdependency\\b",
+          "\\bTestStore\\b"
+        ]
+      },
+      {
+        "label": "deterministic execution guidance",
+        "patterns": [
+          "\\bdeterministic\\b",
+          "\\bcontrolled\\b",
+          "\\bscheduler\\b",
+          "\\bclock\\b",
+          "\\bwithout UIKit\\b",
+          "\\bpure\\b",
+          "\\binput\\b",
+          "\\boutput\\b"
+        ]
+      }
+    ],
+    "required_patterns": [
+      {
+        "label": "testing bullets",
+        "regex": "(?m)^- ",
+        "min_count": 2
+      },
+      {
+        "label": "cancellation guidance",
+        "regex": "\\b(cancel|cancellation|stale)\\b",
+        "scope": "file"
+      },
+      {
+        "label": "review checklist",
+        "regex": "(?m)^##\\s+Review checklist\\b",
+        "scope": "file"
+      },
+      {
+        "label": "anti-pattern coverage",
+        "regex": "(?m)^##\\s+Anti-patterns\\b",
+        "scope": "file"
+      }
+    ]
+  },
+  "playbooks": [
+    {
+      "architecture": "mvc",
+      "name": "MVC",
+      "path": "plugin/skills/ios-architect/references/mvc.md"
+    },
+    {
+      "architecture": "mvp",
+      "name": "MVP",
+      "path": "plugin/skills/ios-architect/references/mvp.md"
+    },
+    {
+      "architecture": "mvvm-uikit",
+      "name": "MVVM-UIKit",
+      "path": "plugin/skills/ios-architect/references/mvvm-uikit.md"
+    },
+    {
+      "architecture": "mvvm-swiftui",
+      "name": "MVVM-SwiftUI",
+      "path": "plugin/skills/ios-architect/references/mvvm-swiftui.md"
+    },
+    {
+      "architecture": "mvvm-c",
+      "name": "MVVM-C",
+      "path": "plugin/skills/ios-architect/references/mvvm-c.md"
+    },
+    {
+      "architecture": "mvi",
+      "name": "MVI",
+      "path": "plugin/skills/ios-architect/references/mvi.md"
+    },
+    {
+      "architecture": "reactive",
+      "name": "Reactive",
+      "path": "plugin/skills/ios-architect/references/reactive.md"
+    },
+    {
+      "architecture": "coordinator",
+      "name": "Coordinator",
+      "path": "plugin/skills/ios-architect/references/coordinator.md"
+    },
+    {
+      "architecture": "viper",
+      "name": "VIPER",
+      "path": "plugin/skills/ios-architect/references/viper.md"
+    },
+    {
+      "architecture": "clean-swift",
+      "name": "Clean Swift",
+      "path": "plugin/skills/ios-architect/references/clean-swift.md"
+    },
+    {
+      "architecture": "clean-architecture",
+      "name": "Clean Architecture",
+      "path": "plugin/skills/ios-architect/references/clean-architecture.md"
+    },
+    {
+      "architecture": "tca",
+      "name": "TCA",
+      "path": "plugin/skills/ios-architect/references/tca.md"
+    },
+    {
+      "architecture": "redux-reswift",
+      "name": "Redux/ReSwift",
+      "path": "plugin/skills/ios-architect/references/redux-reswift.md"
+    },
+    {
+      "architecture": "ribs",
+      "name": "RIBs",
+      "path": "plugin/skills/ios-architect/references/ribs.md"
+    },
+    {
+      "architecture": "modular-tma",
+      "name": "Modular TMA",
+      "path": "plugin/skills/ios-architect/references/modular-tma.md"
+    }
+  ]
+}

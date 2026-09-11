@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "description": "Structure/evidence lint rules for ios-architect references. These are not quality scores.",
+  "playbooks": [
+    {
+      "slug": "mvc",
+      "path": "plugin/skills/ios-architect/references/mvc.md",
+      "local_example": "examples/mvc/"
+    },
+    {
+      "slug": "mvp",
+      "path": "plugin/skills/ios-architect/references/mvp.md",
+      "local_example": "examples/mvp/"
+    },
+    {
+      "slug": "mvvm-uikit",
+      "path": "plugin/skills/ios-architect/references/mvvm-uikit.md",
+      "local_example": "examples/mvvm-uikit/"
+    },
+    {
+      "slug": "mvvm-swiftui",
+      "path": "plugin/skills/ios-architect/references/mvvm-swiftui.md",
+      "local_example": "examples/mvvm-swiftui/"
+    },
+    {
+      "slug": "mvvm-c",
+      "path": "plugin/skills/ios-architect/references/mvvm-c.md",
+      "local_example": "examples/mvvm-c/"
+    },
+    {
+      "slug": "mvi",
+      "path": "plugin/skills/ios-architect/references/mvi.md",
+      "local_example": "examples/mvi/"
+    },
+    {
+      "slug": "reactive",
+      "path": "plugin/skills/ios-architect/references/reactive.md",
+      "local_example": "examples/mvvm-swiftui-combine/"
+    },
+    {
+      "slug": "coordinator",
+      "path": "plugin/skills/ios-architect/references/coordinator.md",
+      "local_example": "examples/coordinator/"
+    },
+    {
+      "slug": "viper",
+      "path": "plugin/skills/ios-architect/references/viper.md",
+      "local_example": "examples/viper/"
+    },
+    {
+      "slug": "clean-swift",
+      "path": "plugin/skills/ios-architect/references/clean-swift.md",
+      "local_example": "examples/clean-swift/"
+    },
+    {
+      "slug": "clean-architecture",
+      "path": "plugin/skills/ios-architect/references/clean-architecture.md",
+      "local_example": "examples/clean-architecture/"
+    },
+    {
+      "slug": "tca",
+      "path": "plugin/skills/ios-architect/references/tca.md",
+      "local_example": "examples/tca/"
+    },
+    {
+      "slug": "redux-reswift",
+      "path": "plugin/skills/ios-architect/references/redux-reswift.md",
+      "local_example": "examples/redux-reswift/"
+    },
+    {
+      "slug": "ribs",
+      "path": "plugin/skills/ios-architect/references/ribs.md",
+      "local_example": "examples/ribs/"
+    },
+    {
+      "slug": "modular-tma",
+      "path": "plugin/skills/ios-architect/references/modular-tma.md",
+      "local_example": "examples/modular-tma/"
+    }
+  ],
+  "support_docs": [
+    {
+      "path": "plugin/skills/ios-architect/SKILL.md",
+      "required_text": [
+        "references/researcher.md",
+        "references/analyser.md",
+        "references/migrator.md",
+        "references/selection-guide.md",
+        "references/reference-feature.md",
+        "`mvc`",
+        "`mvp`",
+        "`mvvm-uikit`",
+        "`mvvm-swiftui`",
+        "`mvvm-c`",
+        "`mvi`",
+        "`reactive`",
+        "`coordinator`",
+        "`viper`",
+        "`clean-swift`",
+        "`clean-architecture`",
+        "`tca`",
+        "`redux-reswift`",
+        "`ribs`",
+        "`modular-tma`"
+      ]
+    },
+    {
+      "path": "plugin/skills/ios-architect/references/_index.md",
+      "required_headings": [
+        "## Reference Map",
+        "## Shared Contract"
+      ],
+      "required_text": [
+        "mvc",
+        "mvp",
+        "mvvm-uikit",
+        "mvvm-swiftui",
+        "mvvm-c",
+        "mvi",
+        "reactive",
+        "coordinator",
+        "viper",
+        "clean-swift",
+        "clean-architecture",
+        "tca",
+        "redux-reswift",
+        "ribs",
+        "modular-tma"
+      ]
+    },
+    {
+      "path": "plugin/skills/ios-architect/references/selection-guide.md",
+      "required_headings": [
+        "## Quick Flow",
+        "## Fit Signals",
+        "## Decision scorecard",
+        "## Reject conditions",
+        "## Output template"
+      ]
+    },
+    {
+      "path": "plugin/skills/ios-architect/references/analyser.md",
+      "required_headings": [
+        "## Purpose",
+        "## Step 1",
+        "## Step 2",
+        "## Step 3",
+        "## Step 5",
+        "## Hand-off"
+      ],
+      "required_text": [
+        "migrator",
+        "references/<pattern>.md"
+      ]
+    },
+    {
+      "path": "plugin/skills/ios-architect/references/researcher.md",
+      "required_headings": [
+        "## Purpose",
+        "## Discovery",
+        "## Decision heuristics",
+        "## Output format",
+        "## Hand-off"
+      ],
+      "required_text": [
+        "references/<pattern>.md",
+        "migrator"
+      ]
+    },
+    {
+      "path": "plugin/skills/ios-architect/references/migrator.md",
+      "required_headings": [
+        "## Universal migration rules",
+        "## Shared primitives",
+        "## Per-pair migration matrix",
+        "## Phase template",
+        "## Hand-off"
+      ],
+      "required_text": [
+        "Rollback triggers",
+        "references/<target>.md",
+        "references/<source>.md"
+      ]
+    },
+    {
+      "path": "plugin/skills/ios-architect/references/reference-feature.md",
+      "required_headings": [
+        "## Domain model",
+        "## Repository contract",
+        "## Fake repository",
+        "## Screens",
+        "## Cross-cutting"
+      ],
+      "required_text": [
+        "Deployment target: iOS 17+ for every buildable example"
+      ]
+    }
+  ],
+  "forbidden_active_text": [
+    "scores.py --min",
+    "Run numeric score eval",
+    "Manual LLM evals should not override",
+    "10.0"
+  ]
+}

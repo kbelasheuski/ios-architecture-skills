@@ -1,4 +1,7 @@
 import SwiftUI
+import Domain
+import UserDomain
+import UserListFeature
 
 // Mini-app — runs UserListFeature in isolation, no main App needed.
 // Uses an in-memory PreviewFetchUsers so no network or full DI graph required.
@@ -20,8 +23,8 @@ struct UserListExampleApp: App {
 
 struct PreviewFetchUsers: FetchUsersUseCase {
     func callAsFunction(page: Int) async throws -> UsersPage {
-        .fixture(
-            users: (0..<10).map { .fixture(name: "User \($0)") },
+        UsersPage(
+            users: (0..<10).map { User(id: UUID(), name: "User \($0)", email: "user\($0)@example.com") },
             page: 1,
             totalPages: 1
         )

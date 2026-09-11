@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Move an iOS codebase from a **source** pattern to a **target** pattern with minimal disruption. Output is a phased migration plan rooted in a small set of reusable primitives, plus a per-pair playbook with the exact mechanical steps.
+Move an iOS codebase from a **source** pattern to a **target** pattern with minimal disruption. For plan-only requests, return a phased migration plan without edits. For implementation requests, execute the requested scope using the primitives and per-pair playbook below.
 
 ## Prerequisites
 
@@ -19,6 +19,23 @@ Move an iOS codebase from a **source** pattern to a **target** pattern with mini
 5. **Keep public APIs stable.** When migrating a feature module, its `Interface` target's public symbols stay the same so callers don't change.
 6. **Roll back triggers**: CI red for > 24h, crash rate up ≥ 10%, perf regression > 5%, dev velocity drop > 30%.
 
+## Execution contract (whole-codebase / "convert everything" requests)
+
+For implementation requests such as "migrate the app" or "convert all screens to <target>", migrate per feature and measure completion by screen coverage. For plan-only requests, inspect and return the plan without edits; execution gates below apply when implementation is requested.
+
+1. **Inventory gate.** Before editing code, produce a coverage map of every screen/flow: `Screen | current owner | target owner | missing pieces | tests | status (done/partial/not-started)`. Do not start micro-refactors until every existing screen is classified.
+2. **Coverage is the metric.** Report it at every checkpoint (e.g. `5/55 done, 3 partial`). Do not spend the budget hardening already-migrated code while most screens are still `not-started`.
+3. **Slice = one whole screen end-to-end** (state owner + navigation route + view + tests), not an access-control or assembly-only commit. A pure `private(set)`/rename commit is allowed only when it directly unlocks that screen's migration.
+4. **Implement through the requested scope.** Start the first slice after inventory. If a missing target decision or ambiguous scope blocks implementation, ask one focused question and continue independent work.
+5. **Definition of done.** Every requested screen is on the target pattern; no transitional shared scaffolding (e.g. a catch-all `Phase1Module` / `SharedScreens`) still routes a migrated screen; old per-screen implementations are deleted, not left as empty folders.
+6. **Stop / report rule.** If screen coverage does not increase across 3 consecutive slices, halt and report honestly ("doing architectural cleanup, not increasing screen coverage") instead of continuing to spend budget.
+
+### Done audit (run before claiming complete)
+
+- Re-run `analyser` Step 1 inventory; target-pattern file counts should match the screen list.
+- Grep for leftover transitional routing, e.g. `grep -rn "Phase1Module\|SharedScreens\|LegacyHost" Sources/` — a migrated screen must not still resolve through it.
+- Any remaining old-pattern markers must correspond to rows still marked `not-started` in the coverage map, never to a screen reported as done.
+
 ## Shared primitives
 
 These are the building blocks every migration uses. The per-pair playbook is just a recipe over them.
@@ -33,15 +50,15 @@ For each model with persistence/network access, define a `protocol XRepository` 
 Lift presentation state out of a `UIViewController` into a `final class XViewModel` (Combine) or `@Observable final class XModel` (SwiftUI). No UIKit/SwiftUI imports in the VM.
 
 ### P4 — Introduce Coordinator
-Replace inline `navigationController.pushViewController` / `present` calls with calls on a `Coordinator` injected into the VC/VM. Coordinator owns the `UINavigationController`.
+Replace inline push/present calls with route events or narrow callbacks from the ViewModel. The Coordinator handles those events, assembles screens, and owns the `UINavigationController`; the ViewModel does not retain a concrete coordinator.
 
 ### P5 — Replace Coordinator with NavigationStack
 For SwiftUI targets, switch to `NavigationStack(path:)` with a typed `enum Route` and `navigationDestination(for:)`. Keep a thin `Router` if deep-linking is needed.
 
-### P6 — Wrap UIKit screen in UIHostingController
+### P6 — Host a SwiftUI screen in UIKit with UIHostingController
 For UIKit-host migration to SwiftUI, write the new SwiftUI view and host it via `UIHostingController`. Old VC's parent Coordinator continues to push it.
 
-### P7 — Wrap SwiftUI screen in UIViewControllerRepresentable
+### P7 — Embed a UIKit controller in SwiftUI with UIViewControllerRepresentable
 Reverse direction when SwiftUI host needs to embed legacy UIKit screens.
 
 ### P8 — Introduce Use Cases (Domain layer)
@@ -51,7 +68,7 @@ For each repository operation, define a `protocol XUseCase` with a single `execu
 Map VM properties → `State`, VM methods → `Action` cases, side-effects → `Effect`. Tests carry over by replacing async expectations with `TestStore` assertions.
 
 ### P10 — Split feature into Tuist/SPM module
-Create `Interface`, `Sources`, `Tests`, optionally `Example`. Move feature into `Sources`, expose its public entry via `Interface`. App target depends on `Interface` only.
+Create `Interface`, `Sources`, `Tests`, optionally `Example`. Move feature into `Sources`, expose its public entry via `Interface`. Sibling features depend on `Interface` only; the app composition root may construct implementation factories.
 
 ### P11 — Introduce dependency container
 Single root composition (no service locator). For UIKit, instantiate in `SceneDelegate`. For SwiftUI, build in `@main App` `init`. For TCA, use `@DependencyClient`.

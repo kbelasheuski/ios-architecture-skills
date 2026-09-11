@@ -7,7 +7,7 @@ Every architecture skill in this bundle implements the **same** reference featur
 ```swift
 import Foundation
 
-public struct User: Equatable, Identifiable, Sendable, Hashable {
+public struct User: Codable, Equatable, Identifiable, Sendable, Hashable {
     public let id: UUID
     public var name: String
     public var email: String
@@ -17,10 +17,14 @@ public struct User: Equatable, Identifiable, Sendable, Hashable {
     }
 }
 
-public struct UsersPage: Equatable, Sendable {
+public struct UsersPage: Decodable, Equatable, Sendable {
     public let users: [User]
     public let page: Int
     public let totalPages: Int
+
+    public init(users: [User], page: Int, totalPages: Int) {
+        self.users = users; self.page = page; self.totalPages = totalPages
+    }
 
     public var hasMore: Bool { page < totalPages }
 }

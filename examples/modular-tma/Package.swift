@@ -3,19 +3,19 @@ import PackageDescription
 
 // Real multi-target SwiftPM graph — the Interface/Sources boundary is enforced by the
 // compiler, not just folders. Each feature's implementation (Model/View) is internal to
-// its `<Feature>` target; siblings and the app may depend only on `<Feature>Interface`.
+// its `<Feature>` target; siblings depend only on `<Feature>Interface`; the app composition root constructs factories.
 // Verify on a Mac with:
 //
-//   xcodebuild test -scheme ModularTMAExample -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
+//   xcodebuild test -scheme ModularTMAExample-Package -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
 //
-// The @main app shell (Sources/App) and the per-feature Example app
-// (Sources/Modules/UserListFeature/Example) belong to no target — they are the
-// composition root and a standalone demo, not part of the module graph under test.
+// Apps/ModularApps.xcodeproj builds the main app and standalone feature demo.
+// Their entrypoints stay outside the seven production library targets.
 let package = Package(
     name: "ModularTMAExample",
     platforms: [.iOS(.v17)],
     products: [
-        .library(name: "ModularTMAExample", targets: ["UserListFeature", "UserDetailFeature", "UserData"])
+        .library(name: "ModularTMAExample", targets: ["UserListFeature", "UserDetailFeature", "UserData"]),
+        .library(name: "UserListFeature", targets: ["UserListFeature"])
     ],
     targets: [
         .target(name: "Domain", path: "Sources/Domain"),
