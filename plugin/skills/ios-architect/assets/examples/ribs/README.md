@@ -29,10 +29,10 @@ Tests/
 
 ## Real-world refs
 
-- uber/RIBs — https://github.com/uber/RIBs
-- iOS Tutorial 1 — https://github.com/uber/RIBs/wiki/iOS-Tutorial-1
-- iOS Tutorial 2 — https://github.com/uber/RIBs/wiki/iOS-Tutorial-2
-- TicTacToe sample — https://github.com/uber/RIBs/tree/main/ios/tutorials
+- uber/RIBs-iOS — https://github.com/uber/RIBs-iOS
+- iOS Tutorial 1 — https://github.com/uber/RIBs-iOS/tree/main/tutorials/tutorial1
+- iOS Tutorial 2 — https://github.com/uber/RIBs-iOS/tree/main/tutorials/tutorial2
+- TicTacToe sample — https://github.com/uber/RIBs-iOS/tree/main/tutorials
 
 ## How testing works
 

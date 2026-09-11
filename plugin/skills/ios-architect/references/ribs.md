@@ -1,10 +1,10 @@
 # RIBs (Uber)
 
 **Source references:**
-- uber/RIBs — https://github.com/uber/RIBs
-- iOS Tutorial 1 — https://github.com/uber/RIBs/wiki/iOS-Tutorial-1
-- iOS Tutorial 2 (composing RIBs) — https://github.com/uber/RIBs/wiki/iOS-Tutorial-2
-- TicTacToe sample sources — https://github.com/uber/RIBs/tree/main/ios/tutorials
+- uber/RIBs-iOS — https://github.com/uber/RIBs-iOS
+- iOS Tutorial 1 — https://github.com/uber/RIBs-iOS/tree/main/tutorials/tutorial1
+- iOS Tutorial 2 (composing RIBs) — https://github.com/uber/RIBs-iOS/tree/main/tutorials/tutorial2
+- TicTacToe sample sources — https://github.com/uber/RIBs-iOS/tree/main/tutorials
 
 Conventions match the TicTacToe tutorial: `Builder` constructs the RIB; `Buildable` is the protocol the parent depends on; `Component<Dep>` carries dependencies; `Router : ViewableRouter` (or `Router`); `Interactor : PresentableInteractor`. Listener interfaces flow events upward.
 
@@ -51,7 +51,7 @@ RIBs/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://github.com/uber/RIBs | RIBs requires router/interactor/component boundaries; the pinned local library tests verify interactor behavior, not Uber-scale payoff. | `assets/examples/ribs/` |
+| https://github.com/uber/RIBs-iOS | RIBs requires router/interactor/component boundaries; the pinned local library tests verify interactor behavior, not Uber-scale payoff. | `assets/examples/ribs/` |
 
 ## Reference implementation
 
