@@ -50,8 +50,8 @@ the app entry point, and model XCTest. `Domain` + `Data` + test fakes follow
 notice:
 
 - **The model is `@Observable @MainActor`**, owned by the View via `@State` and injected into child views as a plain property — no `ObservableObject`/`@Published`.
-- **Paging, refresh, and error state live in the model**, exposed as `private(set)` properties; the View only sends intent (`viewDidLoad`, `didPullToRefresh`, `didLoadNextPageIfNeeded`).
-- **Navigation is a closure passed into the model**, not a reference the model holds — keeps the model UIKit/SwiftUI-free and testable.
+- **Paging, refresh, and error state live in the model**, exposed as `private(set)` properties; the View only sends intent (`onAppear`, `refresh`, `loadNextPageIfNeeded`).
+- **The view constructs `NavigationLink` destinations**; the model owns presentation state without owning navigation.
 - **Models never import SwiftUI**; they depend on the `UserRepository` protocol only.
 
 ## Combine variant
