@@ -2,7 +2,6 @@
 
 **Source references:**
 - Soroush Khanlou, *Coordinators Redux* — https://www.hackingwithswift.com/articles/71/how-to-use-the-coordinator-pattern-in-ios-apps
-- raywenderlich/advanced-ios-app-arch-materials — https://github.com/raywenderlich/advanced-ios-app-arch-materials
 - kudoleh/iOS-Clean-Architecture-MVVM (FlowCoordinator pattern) — https://github.com/kudoleh/iOS-Clean-Architecture-MVVM/blob/master/ExampleMVVM/Presentation/MoviesScene/Flows/MoviesSearchFlowCoordinator.swift
 
 Two variants below — pick the one matching your UI framework.

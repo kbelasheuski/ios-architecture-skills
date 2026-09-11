@@ -1,3 +1,4 @@
+@testable import RIBsExample
 import Foundation
 
 public extension User {

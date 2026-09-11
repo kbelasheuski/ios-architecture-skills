@@ -204,10 +204,13 @@ protocol UserListDataPassing { var dataStore: UserListDataStore? { get } }
 final class UserListRouter: UserListRoutingLogic, UserListDataPassing {
     weak var viewController: UserListViewController?
     weak var dataStore: UserListDataStore?
+    private let repository: UserRepository
+
+    init(repository: UserRepository) { self.repository = repository }
 
     func routeToDetail() {
         guard let id = dataStore?.selectedUserID else { return }
-        let vc = UserDetailConfigurator.make(userID: id)
+        let vc = UserDetailConfigurator.make(repository: repository, userID: id)
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -219,7 +222,7 @@ enum UserListConfigurator {
         let vc = UserListViewController()
         let interactor = UserListInteractor(worker: UserListWorker(repository: repository))
         let presenter = UserListPresenter()
-        let router = UserListRouter()
+        let router = UserListRouter(repository: repository)
 
         vc.interactor = interactor
         vc.router = router

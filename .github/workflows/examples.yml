@@ -49,9 +49,19 @@ jobs:
           - path: plugin/skills/ios-architect/assets/examples/clean-architecture
             scheme: CleanArchitectureExample
           - path: plugin/skills/ios-architect/assets/examples/modular-tma
-            scheme: ModularTMAExample
+            scheme: ModularTMAExample-Package
+          - path: plugin/skills/ios-architect/assets/examples/modular-tma
+            scheme: UsersApp
+            action: build
+            extra_args: -project Apps/ModularApps.xcodeproj
+          - path: plugin/skills/ios-architect/assets/examples/modular-tma
+            scheme: UserListDemo
+            action: build
+            extra_args: -project Apps/ModularApps.xcodeproj
           - path: plugin/skills/ios-architect/assets/examples/redux-reswift
             scheme: ReduxReSwiftExample
+          - path: plugin/skills/ios-architect/assets/examples/ribs
+            scheme: RIBsExample
           - path: plugin/skills/ios-architect/assets/examples/tca
             scheme: TCAExample
             extra_args: -skipMacroValidation
@@ -70,7 +80,7 @@ jobs:
             exit 1
           fi
 
-          xcodebuild test \
+          xcodebuild "${{ matrix.action || 'test' }}" \
             -scheme "${{ matrix.scheme }}" \
             -destination "platform=iOS Simulator,name=${SIMULATOR_NAME}" \
             ${{ matrix.extra_args }}

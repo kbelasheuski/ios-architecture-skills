@@ -51,7 +51,7 @@ RIBs/
 
 | Source | Claim checked | Local proof |
 | --- | --- | --- |
-| https://github.com/uber/RIBs | RIBs requires router/interactor/component boundaries; the local example is reference-only, not proof of Uber-scale payoff. | `assets/examples/ribs/` |
+| https://github.com/uber/RIBs | RIBs requires router/interactor/component boundaries; the pinned local library tests verify interactor behavior, not Uber-scale payoff. | `assets/examples/ribs/` |
 
 ## Reference implementation
 
@@ -59,9 +59,9 @@ The worked `Root → UserList → UserDetail` RIB tree lives in **`assets/exampl
 Builder/Component/Interactor/Router/ViewController per RIB, with the Root wiring
 UserList as its initial child. `Domain` + `Data` follow `references/reference-feature.md` (vendored per example).
 
-> **Requires Uber's `RIBs` framework + `RxSwift`.** RIBs is not distributed via
-> SPM, so this example is readable reference code, not a standalone-buildable
-> package. Use it to study the tree wiring, not as a drop-in.
+> **Pinned package:** RIBs 1.1.0 + RxSwift 6.9.0. The `RIBsExample` scheme builds
+> the library and runs its interactor tests. `Sources/App` is an excluded app shell,
+> not a verified runnable application.
 
 Key things to notice:
 

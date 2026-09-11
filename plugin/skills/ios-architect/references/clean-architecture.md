@@ -122,7 +122,7 @@ XCTest. Read it there rather than reproducing it here; key things to notice when
 ## Anti-patterns
 
 - `import UIKit`/`import SwiftUI` in Domain.
-- Repository protocol in same module as its concrete implementation (breaks DI).
+- Repository protocol in the same module as its concrete implementation does not enforce the Domain/Data dependency boundary at module level.
 - Service locator / global `Container.shared`.
 - VM importing `URLSession` directly.
 - Use Case that's a thin pass-through with no place for rules to grow — fine if you commit, but document intent.
