@@ -1,0 +1,516 @@
+{
+  "version": 1,
+  "description": "Deterministic architecture assertions for ios-architect reference playbooks.",
+  "cases": [
+    {
+      "id": "mvc-reference-positive",
+      "architecture": "mvc",
+      "file": "plugin/skills/ios-architect/references/mvc.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "mvc-reference-negative-placeholders",
+      "architecture": "mvc",
+      "file": "plugin/skills/ios-architect/references/mvc.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "mvp-reference-positive",
+      "architecture": "mvp",
+      "file": "plugin/skills/ios-architect/references/mvp.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "mvp-reference-negative-placeholders",
+      "architecture": "mvp",
+      "file": "plugin/skills/ios-architect/references/mvp.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "mvvm-uikit-reference-positive",
+      "architecture": "mvvm-uikit",
+      "file": "plugin/skills/ios-architect/references/mvvm-uikit.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "mvvm-uikit-reference-negative-placeholders",
+      "architecture": "mvvm-uikit",
+      "file": "plugin/skills/ios-architect/references/mvvm-uikit.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "mvvm-swiftui-reference-positive",
+      "architecture": "mvvm-swiftui",
+      "file": "plugin/skills/ios-architect/references/mvvm-swiftui.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "mvvm-swiftui-reference-negative-placeholders",
+      "architecture": "mvvm-swiftui",
+      "file": "plugin/skills/ios-architect/references/mvvm-swiftui.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "mvvm-c-reference-positive",
+      "architecture": "mvvm-c",
+      "file": "plugin/skills/ios-architect/references/mvvm-c.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "mvvm-c-reference-negative-placeholders",
+      "architecture": "mvvm-c",
+      "file": "plugin/skills/ios-architect/references/mvvm-c.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "mvi-reference-positive",
+      "architecture": "mvi",
+      "file": "plugin/skills/ios-architect/references/mvi.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "mvi-reference-negative-placeholders",
+      "architecture": "mvi",
+      "file": "plugin/skills/ios-architect/references/mvi.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "reactive-reference-positive",
+      "architecture": "reactive",
+      "file": "plugin/skills/ios-architect/references/reactive.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "reactive-reference-negative-placeholders",
+      "architecture": "reactive",
+      "file": "plugin/skills/ios-architect/references/reactive.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "coordinator-reference-positive",
+      "architecture": "coordinator",
+      "file": "plugin/skills/ios-architect/references/coordinator.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "coordinator-reference-negative-placeholders",
+      "architecture": "coordinator",
+      "file": "plugin/skills/ios-architect/references/coordinator.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "viper-reference-positive",
+      "architecture": "viper",
+      "file": "plugin/skills/ios-architect/references/viper.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "viper-reference-negative-placeholders",
+      "architecture": "viper",
+      "file": "plugin/skills/ios-architect/references/viper.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "clean-swift-reference-positive",
+      "architecture": "clean-swift",
+      "file": "plugin/skills/ios-architect/references/clean-swift.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "clean-swift-reference-negative-placeholders",
+      "architecture": "clean-swift",
+      "file": "plugin/skills/ios-architect/references/clean-swift.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "clean-architecture-reference-positive",
+      "architecture": "clean-architecture",
+      "file": "plugin/skills/ios-architect/references/clean-architecture.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "clean-architecture-reference-negative-placeholders",
+      "architecture": "clean-architecture",
+      "file": "plugin/skills/ios-architect/references/clean-architecture.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "tca-reference-positive",
+      "architecture": "tca",
+      "file": "plugin/skills/ios-architect/references/tca.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "tca-reference-negative-placeholders",
+      "architecture": "tca",
+      "file": "plugin/skills/ios-architect/references/tca.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "redux-reswift-reference-positive",
+      "architecture": "redux-reswift",
+      "file": "plugin/skills/ios-architect/references/redux-reswift.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "redux-reswift-reference-negative-placeholders",
+      "architecture": "redux-reswift",
+      "file": "plugin/skills/ios-architect/references/redux-reswift.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "ribs-reference-positive",
+      "architecture": "ribs",
+      "file": "plugin/skills/ios-architect/references/ribs.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "ribs-reference-negative-placeholders",
+      "architecture": "ribs",
+      "file": "plugin/skills/ios-architect/references/ribs.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    },
+    {
+      "id": "modular-tma-reference-positive",
+      "architecture": "modular-tma",
+      "file": "plugin/skills/ios-architect/references/modular-tma.md",
+      "architecture_assertions": [
+        {
+          "label": "has architecture title",
+          "regex": "^#\\s+.+",
+          "expect_match": true
+        },
+        {
+          "label": "has testing strategy",
+          "regex": "^##\\s+Testing strategy\\s*$",
+          "expect_match": true
+        },
+        {
+          "label": "has review checklist",
+          "regex": "^##\\s+Review checklist\\s*$",
+          "expect_match": true
+        }
+      ]
+    },
+    {
+      "id": "modular-tma-reference-negative-placeholders",
+      "architecture": "modular-tma",
+      "file": "plugin/skills/ios-architect/references/modular-tma.md",
+      "architecture_assertions": [
+        {
+          "label": "does not ship placeholder text",
+          "regex": "\\b(TODO|TBD|coming soon|placeholder)\\b",
+          "expect_match": false
+        }
+      ]
+    }
+  ]
+}

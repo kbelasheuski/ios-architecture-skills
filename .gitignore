@@ -7,4 +7,6 @@ DerivedData/
 *.xcuserstate
 xcuserdata/
 *.xcodeproj/project.xcworkspace/xcuserdata/
-tooling/
+tooling/evals/runs/
+tooling/.venv/
+tooling/__pycache__/
